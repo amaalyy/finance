@@ -26,7 +26,7 @@ class Transaction(models.Model):
 
 
   description  = models.TextField(null=True, blank=True)
-  update = models.DateTimeField(auto_now=True)
+  updated = models.DateTimeField(auto_now=True)
   created = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
