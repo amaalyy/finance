@@ -12,19 +12,19 @@ from rest_framework_simplejwt.tokens import RefreshToken
 def getRouts(request):
     routes = [
         {
-            'Endpoint': '/transactions/',
+            'Endpoint': '/transaction/',
             'method': 'GET',
             'body': None,
             'description': 'Returns an array of transactions'
         },
         {
-            'Endpoint': '/transactions/id',
+            'Endpoint': '/transaction/id',
             'method': 'GET',
             'body': None,
             'description': 'Returns a single transaction object'
         },
         {
-            'Endpoint': '/transactions/',
+            'Endpoint': '/transaction/',
             'method': 'POST',
             'body': {
                         "transaction_type": "",
@@ -35,7 +35,7 @@ def getRouts(request):
             'description': 'Creates new transaction with data sent in post request'
         },
         {
-            'Endpoint': '/transactions/id/',
+            'Endpoint': '/transaction/id/',
             'method': 'PUT',
             'body': {
                         "transaction_type": "",
@@ -46,7 +46,7 @@ def getRouts(request):
             'description': 'Update an existing transaction with data sent in post request'
         },
         {
-            'Endpoint': '/transactions/id/',
+            'Endpoint': '/transaction/id/',
             'method': 'DELETE',
             'body': None,
             'description': 'Deletes and exiting transaction'
@@ -176,7 +176,7 @@ def updateTransaction(request, pk):
     if serializer.is_valid():
         serializer.save()
 
-    return serializer.data
+    return Response(serializer.data)
 
 
 def deleteTransaction(request, pk):
