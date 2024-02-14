@@ -1,9 +1,11 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
 
 
 urlpatterns = [
-    path('', views.getRouts, name='routes'),
-    path('transaction/', views.getTransactions, name='notes'),
-    path('transaction/<int:pk>/', views.getTransaction, name='note'),
+    path('', views.getRouts),
+    path('transaction', views.getTransactions),
+    path('transaction/<int:pk>', views.getTransaction),
+    path('register', views.register),
+    path('login', views.user_login),
 ]
