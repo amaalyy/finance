@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'rest_framework_simplejwt',
-    'crosheaders',
+    'corsheaders',
 
 ]
 
@@ -57,7 +57,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 
-    'corsheaders.midleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
