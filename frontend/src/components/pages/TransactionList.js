@@ -20,19 +20,33 @@ const TransactionList = () => {
       setError(error.message);
     }
   };
+const getCategoryName = (category) =>{
+  return category ? category.name: 'Unkown';
+}; 
 
   return (
     <div>
       <h2>Transactions</h2>
       {error && <p>Error fetching transactions: {error}</p>}
-      <ul>
-        {transactions.map((transaction) => (
-          <li key={transaction.id}>
-            <strong>ID:</strong> {transaction.id}, <strong>Description:</strong> {transaction.description}
-            {/* Include other fields as needed */}
-          </li>
-        ))}
-      </ul>
+      {transactions.map((transaction) => (
+        <div key={transaction.id} style={{ background: transaction.transaction_type === 'IN' ? 'lightgreen' : 'lightcoral', padding: '10px', marginBottom: '10px' }}>
+          <p>
+            <strong>ID:</strong> {transaction.id}
+          </p>
+          <p>
+            <strong>Transaction Type:</strong> {transaction.transaction_type === 'IN' ? 'Income' : 'Expense'}
+          </p>
+          <p>
+            <strong>Amount:</strong> {transaction.amount}
+          </p>
+          <p>
+            <strong>Category:</strong> {getCategoryName(transaction.category)}
+          </p>
+          <p>
+            <strong>Description:</strong> {transaction.description}
+          </p>
+        </div>
+      ))}
     </div>
   );
 };
