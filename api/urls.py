@@ -6,6 +6,6 @@ urlpatterns = [
     path('', views.getRouts),
     path('transaction/', views.getTransactions),
     path('transaction/<int:pk>', views.getTransaction),
-    path('register', views.register),
-    path('login', views.user_login),
+    path('register/', views.register),
+    path('login/', views.user_login),
 ]

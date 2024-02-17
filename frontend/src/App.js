@@ -1,11 +1,12 @@
 import './App.css';
-import TransactionList from './components/pages/TransactionList';
+import Login from './pages/Login'; // Import from the pages folder
+
 
 function App() {
   return (
     <div className="App">
       <h1>My App</h1>
-      <TransactionList />
+      <Login />
     </div>
   );
 }
