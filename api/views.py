@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from .models import Transaction
 from .serializers import TransactionsSerializer
 from datetime import timedelta
@@ -82,17 +83,26 @@ def getRouts(request):
 # /transaction/<id> DELETE
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
 def getTransactions(request):
 
     if request.method == 'GET':
         return getTransactionList(request)
 
     if request.method == 'POST':
+        request.data['user'] = request.user.id
         return createTransaction(request)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def getTransaction(request, pk):
+    try:
+        transaction = Transaction.objects.get(pk=pk)
+        if transaction.user != request.user:
+            return Response({'error': 'You do not have permission to access this transaction.'}, status=status.HTTP_403_FORBIDDEN)
+    except Transaction.DoesNotExist:
+        return Response({'error': 'Transaction not found.'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         return getTransactionDetail(request, pk)
@@ -146,7 +156,7 @@ def user_login(request):
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 def getTransactionList(request):
-    transactions = Transaction.objects.all().order_by('-updated')
+    transactions = Transaction.objects.filter(user=request.user).order_by('-updated')
     serializer = TransactionsSerializer(transactions, many=True)
     return Response(serializer.data)
 
@@ -158,29 +168,29 @@ def getTransactionDetail(request, pk):
 
 
 def createTransaction(request):
-    data = request.data
-    transaction = Transaction.objects.create(
-                transaction_type=data['transaction_type'],
-                amount=data['amount'],
-                category_id=data['category_id'],
-                description=data['description']
-            )
-    serializer = TransactionsSerializer(transaction, many=False) 
-    return Response(serializer.data)
+    serializer = TransactionsSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(user=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def updateTransaction(request, pk):
-    data = request.data
-    transaction = Transaction.objects.get(id=pk)
-    serializer = TransactionsSerializer(instance=transaction, data=data)
+    transaction = Transaction.objects.get(pk=pk)
+    if transaction.user != request.user:
+        return Response({'error': 'You do not have permission to update this transaction.'}, status=status.HTTP_403_FORBIDDEN)
 
+    serializer = TransactionsSerializer(instance=transaction, data=request.data)
     if serializer.is_valid():
         serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    return Response(serializer.data)
 
 
 def deleteTransaction(request, pk):
-    transaction = Transaction.objects.get(id=pk)
+    transaction = Transaction.objects.get(pk=pk)
+    if transaction.user != request.user:
+        return Response({'error': 'You do not have permission to delete this transaction.'}, status=status.HTTP_403_FORBIDDEN)
     transaction.delete()
-    return Response('Transaction was deleted!')
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
