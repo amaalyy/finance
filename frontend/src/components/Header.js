@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <header>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary" >
         <Link className="navbar-brand" to="/">
-          My App
+          My Finance App
         </Link>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">

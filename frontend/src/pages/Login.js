@@ -36,7 +36,7 @@ const Login = () => {
       <Header />
       <div className="row justify-content-md-center">
         <div className="col-md-6">
-          <h2>Login</h2>
+          <h2 className="text-center">Login</h2>
           {error && <p className="text-danger">{error}</p>}
           <form onSubmit={handleSubmit}>
             <div className="form-group">

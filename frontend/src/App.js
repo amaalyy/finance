@@ -12,7 +12,7 @@ function App() {
     <AuthProvider>
     <Router>
     <div className="App">
-      <h1>My App</h1>
+    
       <Routes>
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/login" element={<Login />} />
