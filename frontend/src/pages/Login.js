@@ -1,14 +1,18 @@
 import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // useNavigate for react-router-dom v6
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../contexts/AuthContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // useNavigate for react-router-dom v6
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,44 +23,52 @@ const Login = () => {
         password,
       });
 
-      // If authentication is successful, save user data to the context
       login(response.data);
-
-      // Redirect the user to the home page
-      navigate('/home'); // useNavigate for react-router-dom v6
+      navigate('/home');
     } catch (error) {
-      // If authentication fails, display an error message to the user
       console.error('Login failed:', error.response.data);
       setError('Invalid username or password');
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+    <div className="container mt-5">
+      <Header />
+      <div className="row justify-content-md-center">
+        <div className="col-md-6">
+          <h2>Login</h2>
+          {error && <p className="text-danger">{error}</p>}
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                className="form-control"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Login
+            </button>
+          </form>
+          <p className="mt-3">
+            Don't have an account? <Link to="/register">Register here</Link>
+          </p>
         </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-      <p>
-        Don't have an account? <Link to="/register">Register here</Link>
-      </p>
+      </div>
+      <Footer />
     </div>
   );
 };

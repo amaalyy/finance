@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
 import axios from 'axios';
 
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
+
 const RegisterPage = () => {
     const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -49,6 +53,7 @@ const RegisterPage = () => {
 
   return (
     <div>
+      <Header />
       <h2>Register</h2>
       {registrationSuccess ? (
         <div>
@@ -94,6 +99,7 @@ const RegisterPage = () => {
       )}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <button onClick={goBack}>GO Back</button>
+      <Footer />
     </div>
   );
 };
