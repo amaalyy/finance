@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
   // Function to check if the user is authenticated (e.g., on page load)
   const checkAuth = async () => {
     try {
+      console.log('Cheking authentication...');
       const token = localStorage.getItem('token');
 
       if (token) {
@@ -36,17 +37,21 @@ export const AuthProvider = ({ children }) => {
           },
         });
 
+        console.log('authentication successful:', response.data)
+
         setUser(response.data);
       }
     } catch (error) {
       console.error('Authentication check failed:', error.message);
     } finally {
+      console.log('Authentication check completed');
       setLoading(false);
     }
   };
 
   // Run checkAuth on component mount
   useEffect(() => {
+    console.log('AuthProvider mouted or updated');
     checkAuth();
   }, []);
 

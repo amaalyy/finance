@@ -4,15 +4,18 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const HomePage = () => {
-    const { user, logout } = useContext(AuthContext);
-
+    const { user, logout, loading } = useContext(AuthContext);
+    console.log('user in HomePage');
+    if (loading) {
+      return <p>Loading...</p>
+    }
     return(
         <div>
           <Header />
         <h2>Welcome to the Home Page</h2>
         {user ? (
           <div>
-            <p>Hello, {user.username}!</p>
+            <p>Hello, you are logged in as {user.username}!</p>
             
             <button onClick={logout}>Logout</button>
           </div>
