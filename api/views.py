@@ -150,10 +150,28 @@ def user_login(request):
         return Response({
             'success': 'Login successful',
             'token': str(refresh.access_token),
-            'refresh_token': str(refresh)
+            'refresh_token': str(refresh),
+            'username': user.username
         })
     else:
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+    
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def check_auth(request):
+    """
+    Check if the user is authenticated and return user data.
+    """
+    user = request.user
+    user_data = {
+        'username': user.username,
+        'email': user.email,
+        # Include any other user data you want to return
+    }
+    return Response({'authenticated': True, 'user': user_data})
+
+
 
 def getTransactionList(request):
     transactions = Transaction.objects.filter(user=request.user).order_by('-updated')
