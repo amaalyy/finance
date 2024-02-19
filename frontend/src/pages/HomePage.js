@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import TransactionList from '../components/TransactionList'
 
 const HomePage = () => {
     const { user, logout, loading } = useContext(AuthContext);
@@ -16,6 +17,7 @@ const HomePage = () => {
         {user ? (
           <div>
             <p>Hello, you are logged in as {user.username}!</p>
+            <TransactionList />
             
             <button onClick={logout}>Logout</button>
           </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 
 const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
@@ -10,11 +11,17 @@ const TransactionList = () => {
 
   const getTransactions = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/transaction/');
-      if (!response.ok) {
+      const token = localStorage.getItem('token');
+      const response =  await axios.get('http://127.0.0.1:8000/api/transaction', { 
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response);
+      if (response.status !== 200) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      const data = await response.json();
+      const data = await response.data;
       setTransactions(data);
     } catch (error) {
       setError(error.message);
