@@ -27,9 +27,7 @@ const TransactionList = () => {
       setError(error.message);
     }
   };
-const getCategoryName = (category) =>{
-  return category ? category.name: 'Unkown';
-}; 
+
 
   return (
     <div>
@@ -47,7 +45,7 @@ const getCategoryName = (category) =>{
             <strong>Amount:</strong> {transaction.amount}
           </p>
           <p>
-            <strong>Category:</strong> {getCategoryName(transaction.category)}
+            <strong>Category:</strong> {transaction.category_name}
           </p>
           <p>
             <strong>Description:</strong> {transaction.description}
