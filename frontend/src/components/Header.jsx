@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <header>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary" >
+      <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <Link className="navbar-brand" to="/">
           My Finance App
         </Link>
@@ -20,8 +20,8 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/register">
-                Register
+              <Link className="nav-link" to="/signup">
+                Signup
               </Link>
             </li>
           </ul>
