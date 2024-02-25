@@ -1,9 +1,9 @@
 const Footer = () => {
   return (
-    <footer className="mt-5 fixed-bottom bg-light">
-      <div className="text-center">
-        <p>&copy; 2024 Finance App. All rights reserved.</p>
-      </div>
+    <footer className="fixed bottom-0 w-full ">
+      <p className=" text-center">
+        &copy; 2024 Wealthwise. All rights reserved.
+      </p>
     </footer>
   );
 };

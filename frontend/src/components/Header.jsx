@@ -5,7 +5,7 @@ const Header = () => {
     <header>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <Link className="navbar-brand" to="/">
-          My Finance App
+          Wealthwise
         </Link>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">

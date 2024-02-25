@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
 import axios from 'axios';
-
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import BackgroundImage from '/background.jpg';
+import EmailIcon from '/email.svg';
+import UserIcon from '/username.svg';
+import PasswordIcon from '/password.svg';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [signupSuccess, setSignupSuccess] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,8 +31,8 @@ const Signup = () => {
         password
       });
 
-      // If registration is successful, set registrationSuccess to true
-      setRegistrationSuccess(true);
+      // If signup is successful, set signupSuccess to true
+      setSignupSuccess(true);
 
       // Reset the form fields and error message
       setEmail('');
@@ -40,9 +41,9 @@ const Signup = () => {
       setConfirmPassword('');
       setError('');
     } catch (error) {
-      // If registration fails, display an error message to the user
-      console.error('Registration failed:', error.response.data);
-      setError('Registration failed. Please try again.');
+      // If signup fails, display an error message to the user
+      console.error('Sign up failed:', error.response.data);
+      setError('Sign up failed. Please try again.');
     }
   };
 
@@ -52,62 +53,116 @@ const Signup = () => {
 
   return (
     <div className="container mt-5">
-      <Header />
-      <div className="row justify-content-md-center mt-5 p-5">
-        <h2>Signup</h2>
-        {registrationSuccess ? (
-          <div>
-            <p>Registration successful! Click below to login:</p>
-            <Link to="/">Login</Link>
-          </div>
-        ) : (
-          <>
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label>Email:</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div>
-                <label>Username:</label>
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-              <div>
-                <label>Password:</label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div>
-                <label>Confirm Password:</label>
-                <input
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-              </div>
-              <button type="submit" className="btn btn-primary mt-4 w-100">
-                Sign up
-              </button>
-            </form>
-            <p>
-              Already have an account? <Link to="/login">Login here</Link>
-            </p>
-          </>
-        )}
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button onClick={goBack}>GO Back</button>
+      <div className="p-5">
+        <img
+          className="w-full h-full absolute inset-0 -z-10"
+          src={BackgroundImage}
+          alt=""
+        />
+        <div className="bg-white w-[450px] mt-16 ml-auto mr-11 px-16 pt-7 rounded-lg pb-9 shadow-xl">
+          <h2 className="text-[40px] text-blue text-center font-bold">
+            Sign up
+          </h2>
+          {signupSuccess ? (
+            <div className='antialiased text-lg mt-5 text-center'>
+              <p className='mb-5 antialiased'>signup successful! Click below to login:</p>
+              <Link className='bg-blue text-white w-28 p-1.5 rounded-full hover:bg-hover-btn block mx-auto' to="/">Login</Link>
+            </div>
+          ) : (
+            <>
+              <form onSubmit={handleSubmit}>
+                <div className="pb-3 mt-5">
+                  <label className='antialiased'>Email</label>
+                  <div className="grid grid-cols-[auto_1fr] bg-gray-100 p-2.5 rounded-md mt-1.5">
+                    <img
+                      className="my-auto h-5 w-5 bg-gray-100"
+                      src={EmailIcon}
+                      alt=""
+                    />
+                    <input
+                      placeholder="Type your email"
+                      type="email"
+                      className="bg-gray-100 w-full ml-1 focus:outline-none"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="form-group pb-3 mt-2">
+                  <label className='antialiased'>Username</label>
+                  <div className="grid grid-cols-[auto_1fr] bg-gray-100 p-2.5 rounded-md mt-1.5">
+                    <img
+                      className="my-auto h-5 w-5 bg-gray-100"
+                      src={UserIcon}
+                      alt=""
+                    />
+                    <input
+                      placeholder="Type your username"
+                      type="text"
+                      className="bg-gray-100 w-full ml-1 focus:outline-none"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="form-group pb-3 mt-2">
+                  <label className='antialiased'>Password</label>
+                  <div className="grid grid-cols-[auto_1fr] bg-gray-100 p-2.5 rounded-md mt-1.5">
+                    <img
+                      className="my-auto h-5 w-5 bg-gray-100"
+                      src={PasswordIcon}
+                      alt=""
+                    />
+                    <input
+                      placeholder="Type your password"
+                      type="password"
+                      className="bg-gray-100 w-full ml-1 focus:outline-none"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="form-group pb-3 mt-2">
+                  <label className='antialiased'>Confirm Password</label>
+                  <div className="grid grid-cols-[auto_1fr] bg-gray-100 p-2.5 rounded-md mt-1.5">
+                    <img
+                      className="my-auto h-5 w-5 bg-gray-100"
+                      src={PasswordIcon}
+                      alt=""
+                    />
+                    <input
+                      placeholder="Type your password again"
+                      type="password"
+                      className="bg-gray-100 w-full ml-1 focus:outline-none"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="mt-5 bg-blue text-white w-full p-1.5 rounded-full hover:bg-hover-btn"
+                >
+                  Sign up
+                </button>
+              </form>
+              <p className="text-center pt-5 antialiased">
+                Already have an account?{' '}
+                <Link className=" text-blue hover:text-hover-btn" to="/login">
+                  Login here
+                </Link>
+              </p>
+            </>
+          )}
+          {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+          <button
+            className="mt-4 w-full text-sm text-blue hover:text-hover-btn antialiased"
+            onClick={goBack}
+          >
+            ← Go Back
+          </button>
+        </div>
       </div>
-      <Footer />
     </div>
   );
 };
