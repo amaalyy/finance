@@ -91,7 +91,7 @@ const Login = () => {
               Login
             </button>
           </form>
-          <p className="text-center text-sm pt-6 text-[#798995]">
+          <div className="text-center text-sm pt-6 text-[#798995]">
             Or login with
             <div className="flex justify-evenly mt-6">
               <Link to="https://www.facebook.com/">
@@ -104,7 +104,7 @@ const Login = () => {
                 <img className="h-11 w-11" src={GithubIcon} alt="" />
               </Link>
             </div>
-          </p>
+          </div>
           <p className="mt-10 text-center antialiased">
             Don't have an account??{' '}
             <Link className=" text-blue hover:text-hover-btn" to="/signup">
