@@ -234,7 +234,7 @@ def user_login(request):
         login(request, user)
         refresh = RefreshToken.for_user(user)
         if remember_me:
-            refresh.set_exp(lifetime=timedelta(days=90))
+            refresh.set_exp(lifetime=timedelta(days=30))  # Set token expiration to 30 days
         return Response({
             'success': 'Login successful',
             'token': str(refresh.access_token),
