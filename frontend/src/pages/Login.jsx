@@ -72,7 +72,6 @@ const Login = () => {
                   src={PasswordIcon}
                   alt=""
                 />
-
                 <input
                   placeholder="Type your password"
                   name="password"

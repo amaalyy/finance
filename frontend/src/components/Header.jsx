@@ -2,25 +2,22 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <header>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <Link className="navbar-brand" to="/">
-          Wealthwise
-        </Link>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/home">
+    <header className='bg-[#FEE781]'>
+      <nav className="">
+        <div className="">
+          <ul className="">
+            <li className="">
+              <Link className="" to="/home">
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">
+            <li className="">
+              <Link className="" to="/login">
                 Login
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/signup">
+            <li className="">
+              <Link className="" to="/signup">
                 Signup
               </Link>
             </li>

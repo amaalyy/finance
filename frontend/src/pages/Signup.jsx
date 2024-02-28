@@ -64,15 +64,22 @@ const Signup = () => {
             Sign up
           </h2>
           {signupSuccess ? (
-            <div className='antialiased text-lg mt-5 text-center'>
-              <p className='mb-5 antialiased'>signup successful! Click below to login:</p>
-              <Link className='bg-blue text-white w-28 p-1.5 rounded-full hover:bg-hover-btn block mx-auto' to="/">Login</Link>
+            <div className="antialiased text-lg mt-5 text-center">
+              <p className="mb-5 antialiased">
+                signup successful! Click below to login:
+              </p>
+              <Link
+                className="bg-blue text-white w-28 p-1.5 rounded-full hover:bg-hover-btn block mx-auto"
+                to="/"
+              >
+                Login
+              </Link>
             </div>
           ) : (
             <>
               <form onSubmit={handleSubmit}>
                 <div className="pb-3 mt-5">
-                  <label className='antialiased'>Email</label>
+                  <label className="antialiased">Email</label>
                   <div className="grid grid-cols-[auto_1fr] bg-gray-100 p-2.5 rounded-md mt-1.5">
                     <img
                       className="my-auto h-5 w-5 bg-gray-100"
@@ -89,7 +96,7 @@ const Signup = () => {
                   </div>
                 </div>
                 <div className="form-group pb-3 mt-2">
-                  <label className='antialiased'>Username</label>
+                  <label className="antialiased">Username</label>
                   <div className="grid grid-cols-[auto_1fr] bg-gray-100 p-2.5 rounded-md mt-1.5">
                     <img
                       className="my-auto h-5 w-5 bg-gray-100"
@@ -106,7 +113,7 @@ const Signup = () => {
                   </div>
                 </div>
                 <div className="form-group pb-3 mt-2">
-                  <label className='antialiased'>Password</label>
+                  <label className="antialiased">Password</label>
                   <div className="grid grid-cols-[auto_1fr] bg-gray-100 p-2.5 rounded-md mt-1.5">
                     <img
                       className="my-auto h-5 w-5 bg-gray-100"
@@ -123,7 +130,7 @@ const Signup = () => {
                   </div>
                 </div>
                 <div className="form-group pb-3 mt-2">
-                  <label className='antialiased'>Confirm Password</label>
+                  <label className="antialiased">Confirm Password</label>
                   <div className="grid grid-cols-[auto_1fr] bg-gray-100 p-2.5 rounded-md mt-1.5">
                     <img
                       className="my-auto h-5 w-5 bg-gray-100"
