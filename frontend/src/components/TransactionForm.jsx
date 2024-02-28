@@ -1,15 +1,40 @@
-// TransactionForm.js
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const TransactionForm = ({ onAddTransaction }) => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
-  const [transaction_type, setTransactionType] = useState(''); // Assuming transaction_type is a state variable
+  const [transactionType, setTransactionType] = useState(''); // Assuming transactionType is a state variable
+  const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getCategory();
+  }, []);
+
+  const getCategory = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://127.0.0.1:8000/api/categories', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response);
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.data;
+      setCategories(data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   const handleAddTransaction = () => {
     // Validate input fields
-    if (!description || !amount || !category || !transaction_type) {
+    if (!description || !amount || !category || !transactionType) {
       alert('Please fill in all fields');
       return;
     }
@@ -22,7 +47,7 @@ const TransactionForm = ({ onAddTransaction }) => {
       description,
       amount: transactionAmount,
       category,
-      transaction_type,
+      transaction_type: transactionType, // corrected variable name
     };
 
     // Call the callback function from the parent component
@@ -56,17 +81,20 @@ const TransactionForm = ({ onAddTransaction }) => {
       </label>
       <label>
         Category:
-        <input
-          type="text"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        />
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="">Select a category</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
       </label>
       <label>
         Transaction Type:
         <input
           type="text"
-          value={transaction_type}
+          value={transactionType}
           onChange={(e) => setTransactionType(e.target.value)}
         />
       </label>

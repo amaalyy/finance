@@ -1,5 +1,5 @@
 // TransactionActions.js
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TransactionForm from './TransactionForm'; // Import the TransactionForm component
 
 const TransactionActions = ({ onAddTransaction }) => {
