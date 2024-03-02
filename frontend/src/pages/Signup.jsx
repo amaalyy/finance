@@ -53,13 +53,13 @@ const Signup = () => {
 
   return (
     <div className="container mt-5">
-      <div className="p-5">
+      <div className="">
         <img
           className="w-full h-full absolute inset-0 -z-10"
           src={BackgroundImage}
           alt=""
         />
-        <div className="bg-white w-[450px] mt-16 ml-auto mr-11 px-16 pt-7 rounded-lg pb-9 shadow-xl">
+        <div className="bg-white w-[450px] mt-4 ml-auto mr-11 px-16 pt-7 rounded-lg pb-9 shadow-xl">
           <h2 className="text-[40px] text-blue text-center font-bold">
             Sign up
           </h2>
