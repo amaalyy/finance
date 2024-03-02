@@ -1,10 +1,12 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import TransactionList from '../components/TransactionList'
 import TransactionActions from '../components/TransactionActions'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -37,6 +39,12 @@ const HomePage = () => {
         }
       }
     }
+    const navigate = useNavigate();
+    useEffect(() => {
+      if (!user) {
+        navigate('/login');
+      }
+    }, [logout]);
     return(
         <div>
           <Header />
@@ -47,7 +55,7 @@ const HomePage = () => {
             <TransactionActions onAddTransaction={handleAddTransaction} />
             <TransactionList />
             
-            <button onClick={logout}>Logout</button>
+            
           </div>
         ) : (
           <p>You are not logged in.</p>
