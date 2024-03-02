@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios'
 
-const TransactionList = () => {
+const TransactionList = ({ updatedTransactions, forceRemount }) => {
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    setTransactions(updatedTransactions);
     getTransactions();
-  }, []);
+  }, [updatedTransactions, forceRemount]);
 
   const getTransactions = async () => {
     try {

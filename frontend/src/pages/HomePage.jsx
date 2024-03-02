@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 const HomePage = () => {
     const { user, logout, loading } = useContext(AuthContext);
     const [transactions, setTransactions] = useState([]);
+    const [forceRemount, setForceRemount] = useState(0);
     console.log('user in HomePage');
     if (loading) {
       return <p>Loading...</p>
@@ -32,6 +33,7 @@ const HomePage = () => {
         const response = await axiosInstance.post('/transaction/',newTransaction);
         console.log('Transaction added successfully:', response.data);
         setTransactions([...transactions, response.data]);
+        setForceRemount((prevForceRemount) => prevForceRemount + 1);
       } catch (error) {
         console.error('Error adding transaction:', error);
         if (error.response) {
@@ -53,7 +55,7 @@ const HomePage = () => {
           <div>
             <p>Hello, you are logged in as {user.username}!</p>
             <TransactionActions onAddTransaction={handleAddTransaction} />
-            <TransactionList />
+            <TransactionList updatedTransactions={transactions} forceRemount={forceRemount}/>
             
             
           </div>
