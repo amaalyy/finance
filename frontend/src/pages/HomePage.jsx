@@ -80,17 +80,21 @@ const HomePage = () => {
               Last Transaction
             </p>
             <div className="text-white antialiased grid grid-cols-[400px_400px_400px] mb-8 px-7 gap-8">
-              <div className="h-[219px] bg-[#FE7097] p-6 mt-4 rounded-3xl ">
+              <div className="relative h-[219px] p-6 mt-4 rounded-3xl bg-gradient-to-r from-[#FFBC95] to-[#FE7095]">
+                <div className="bg-no-repeat bg-right inset-0 absolute bg-[url('https://demo.bootstrapdash.com/purple/themes/assets/images/dashboard/circle.svg')]"></div>
                 <p className="text-[25px]">salery</p>
                 <p className="text-[40px]">5000</p>
                 <p className="text-[20px]">income</p>
               </div>
-              <div className="h-[219px] bg-[#4FCBBC] p-6 mt-4 rounded-3xl">
+              <div className="relative h-[219px] p-6 mt-4 rounded-3xl bg-gradient-to-r from-[#8EC8F8] to-[#047EDF]">
+                <div className="bg-no-repeat bg-right inset-0 absolute bg-[url('https://demo.bootstrapdash.com/purple/themes/assets/images/dashboard/circle.svg')]"></div>
                 <p className="text-[25px]">rent</p>
                 <p className="text-[40px]">200</p>
                 <p className="text-[20px]">Expense</p>
               </div>
-              <div className="h-[219px] bg-[#5EC1EE] p-6 mt-4 rounded-3xl">
+
+              <div className="relative h-[219px] p-6 mt-4 rounded-3xl bg-gradient-to-r from-[#83D8D1] to-[#0CCDAF]">
+                <div className="bg-no-repeat bg-right inset-0 absolute bg-[url('https://demo.bootstrapdash.com/purple/themes/assets/images/dashboard/circle.svg')]"></div>
                 <p className="text-[25px]">food</p>
                 <p className="text-[40px]">100</p>
                 <p className="text-[20px]">Expense</p>
@@ -120,29 +124,42 @@ const HomePage = () => {
                     labels: ['Mon', 'Tus', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
                     datasets: [
                       {
-                        label: '',
+                        label: 'Income',
                         data: [12, 19, 3, 8, 8, 10, 7],
                         backgroundColor: [
                           'rgba(255, 99, 132, 0.2)',
-                          'rgba(255, 159, 64, 0.2)',
-                          'rgba(255, 205, 86, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(153, 102, 255, 0.2)',
-                          'rgba(201, 203, 207, 0.2)'
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(255, 99, 132, 0.2)',
                         ]
                       },
                       {
-                        label: '',
+                        label: 'Expense',
                         data: [12, 19, 3, 8, 8, 10, 7],
                         backgroundColor: [
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(255, 159, 64, 0.2)',
-                          'rgba(255, 205, 86, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
                           'rgba(54, 162, 235, 0.2)',
-                          'rgba(153, 102, 255, 0.2)',
-                          'rgba(201, 203, 207, 0.2)'
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                        ]
+                      },
+                      {
+                        label: 'Balance',
+                        data: [12, 19, 3, 8, 8, 10, 7],
+                        backgroundColor: [
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
                         ]
                       }
                     ]
