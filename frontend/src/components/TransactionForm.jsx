@@ -57,7 +57,7 @@ const TransactionForm = ({ onAddTransaction }) => {
     setDescription('');
     setAmount('');
     setCategory('');
-    setTransactionType(''); // Clear transaction_type if needed
+    setTransactionType('EX'); // Clear transaction_type if needed
   };
 
   return (
@@ -82,7 +82,7 @@ const TransactionForm = ({ onAddTransaction }) => {
       <label>
         Category:
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="">Select a category</option>
+          <option value="">---------------</option>
           {categories.map((category) => (
             <option key={category.id} value={category.id}>
               {category.name}
@@ -92,11 +92,11 @@ const TransactionForm = ({ onAddTransaction }) => {
       </label>
       <label>
         Transaction Type:
-        <input
-          type="text"
-          value={transactionType}
-          onChange={(e) => setTransactionType(e.target.value)}
-        />
+        <select value={transactionType} onChange={(e) => setTransactionType(e.target.value)}>
+          <option value="">----------</option>
+          <option value="EX">Expense </option>
+          <option value="IN">Income </option>
+        </select>
       </label>
       <button onClick={handleAddTransaction}>Add Transaction</button>
     </div>

@@ -1,4 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
+
+import { AuthContext } from '../contexts/AuthContext';
+import { useContext, useEffect } from 'react';
+
+
 
 const Header = ({ title }) => {
   return (
