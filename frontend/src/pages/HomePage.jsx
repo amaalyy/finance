@@ -69,7 +69,7 @@ const HomePage = () => {
     <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] h-screen">
       <Sidebar />
       <Header title="Dashboard" />
-      <div className="bg-cyan-100">
+      <div className="bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
         <h2>Welcome to the Home Page</h2>
         {user ? (
           <div className="row-start-2">
@@ -80,20 +80,20 @@ const HomePage = () => {
               Last Transaction
             </p>
             <div className="text-white antialiased grid grid-cols-[400px_400px_400px] mb-8 px-7 gap-8">
-              <div className="relative h-[219px] p-6 mt-4 rounded-3xl bg-gradient-to-r from-[#FFBC95] to-[#FE7095]">
+              <div className="relative h-[219px] p-6 mt-4 rounded-3xl bg-gradient-to-r from-[#FFBC95] to-[#FE7095] drop-shadow-xl">
                 <div className="bg-no-repeat bg-right inset-0 absolute bg-[url('https://demo.bootstrapdash.com/purple/themes/assets/images/dashboard/circle.svg')]"></div>
                 <p className="text-[25px]">salery</p>
                 <p className="text-[40px]">5000</p>
                 <p className="text-[20px]">income</p>
               </div>
-              <div className="relative h-[219px] p-6 mt-4 rounded-3xl bg-gradient-to-r from-[#8EC8F8] to-[#047EDF]">
+              <div className="relative h-[219px] p-6 mt-4 rounded-3xl bg-gradient-to-r from-[#8EC8F8] to-[#047EDF] drop-shadow-xl">
                 <div className="bg-no-repeat bg-right inset-0 absolute bg-[url('https://demo.bootstrapdash.com/purple/themes/assets/images/dashboard/circle.svg')]"></div>
                 <p className="text-[25px]">rent</p>
                 <p className="text-[40px]">200</p>
                 <p className="text-[20px]">Expense</p>
               </div>
 
-              <div className="relative h-[219px] p-6 mt-4 rounded-3xl bg-gradient-to-r from-[#83D8D1] to-[#0CCDAF]">
+              <div className="relative h-[219px] p-6 mt-4 rounded-3xl bg-gradient-to-r from-[#83D8D1] to-[#0CCDAF] drop-shadow-xl">
                 <div className="bg-no-repeat bg-right inset-0 absolute bg-[url('https://demo.bootstrapdash.com/purple/themes/assets/images/dashboard/circle.svg')]"></div>
                 <p className="text-[25px]">food</p>
                 <p className="text-[40px]">100</p>
@@ -101,7 +101,7 @@ const HomePage = () => {
               </div>
             </div>
             <div className="grid grid-cols-[auto_1fr]">
-              <div className="p-6 ml-8 h-[400px] w-[400px] bg-white rounded-3xl">
+              <div className="p-6 ml-8 h-[400px] w-[400px] bg-white rounded-3xl drop-shadow-xl">
                 <Doughnut
                   data={{
                     labels: ['Income', 'Expense', 'Balance'],
@@ -118,49 +118,25 @@ const HomePage = () => {
                   }}
                 />
               </div>
-              <dir className="w-[835px] h-[400px] p-5 ml-8 mt-0 bg-white rounded-3xl">
+              <dir className="w-[828px] h-[400px] p-5 ml-8 mt-0 bg-white rounded-3xl drop-shadow-xl">
                 <Bar
                   data={{
                     labels: ['Mon', 'Tus', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
                     datasets: [
                       {
                         label: 'Income',
-                        data: [12, 19, 3, 8, 8, 10, 7],
-                        backgroundColor: [
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(255, 99, 132, 0.2)',
-                        ]
+                        data: [1, 9, 13, 18, 19, 13, 17],
+                        backgroundColor: ['rgba(255, 99, 132, 0.2)']
                       },
                       {
                         label: 'Expense',
-                        data: [12, 19, 3, 8, 8, 10, 7],
-                        backgroundColor: [
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                        ]
+                        data: [2, 6, 15, 8, 11, 7, 16],
+                        backgroundColor: ['rgba(54, 162, 235, 0.2)']
                       },
                       {
                         label: 'Balance',
-                        data: [12, 19, 3, 8, 8, 10, 7],
-                        backgroundColor: [
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                        ]
+                        data: [4, 5, 3, 17, 8, 10, 7],
+                        backgroundColor: ['rgba(75, 192, 192, 0.2)'   ]
                       }
                     ]
                   }}
@@ -172,7 +148,6 @@ const HomePage = () => {
           <p>You are not logged in.</p>
         )}
       </div>
-      <Footer />
     </div>
   );
 };
