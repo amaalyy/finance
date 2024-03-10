@@ -6,6 +6,8 @@ import TransactionList from '../components/TransactionList'
 import TransactionActions from '../components/TransactionActions'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import BalanceSummary from '../components/BalanceSummary';
+
 
 
 
@@ -54,6 +56,7 @@ const HomePage = () => {
         {user ? (
           <div>
             <p>Hello, you are logged in as {user.username}!</p>
+            <BalanceSummary forceRemount={forceRemount} />
             <TransactionActions onAddTransaction={handleAddTransaction} />
             <TransactionList updatedTransactions={transactions} forceRemount={forceRemount}/>
             
