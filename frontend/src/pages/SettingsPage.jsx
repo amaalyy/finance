@@ -12,7 +12,7 @@ import { Bar, Doughnut } from 'react-chartjs-2';
 
 function SettingsPage() {
   return (
-    <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] h-screen">
+    <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] h-screen bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
       <Sidebar />
       <Header title="Settings" />
     </div>

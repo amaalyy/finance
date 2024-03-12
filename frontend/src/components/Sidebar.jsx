@@ -7,14 +7,18 @@ import SettingsIcon from '/Settings.svg';
 import ReportIcon from '/report.svg';
 import CategoryIcon from '/Category.svg';
 import LogoutIcone from '/Logout.svg';
+import LogoIcone from '/Logo.svg';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   const { logout } = useContext(AuthContext);
   return (
-    <div className="grid bg-[#E4F3FB] px-3.5 shadow-sm row-span-2">
-      <NavLink className="" to="/">
+    <div className="grid grid-rows-[250px_auto_auto] bg-white px-3.5 shadow-sm row-span-2 h-screen sticky top-0">
+      <NavLink
+        className="grid grid-cols-[auto_auto_1fr] mx-3 text-[28px] antialiased mt-6"
+        to="/"
+      >
         Wealthwise
       </NavLink>
       <nav className="text-[#5c636c]">
@@ -24,8 +28,8 @@ const Sidebar = () => {
               to="/home"
               className={({ isActive }) =>
                 isActive
-                  ? 'grid grid-cols-[auto_1fr] rounded-lg bg-[#54ADFE] text-white p-3'
-                  : 'grid grid-cols-[auto_1fr] rounded-lg hover:bg-[#54ADFE] hover:text-white p-3'
+                  ? 'grid grid-cols-[auto_1fr] rounded-lg bg-[#54ADFE] text-white p-3 group'
+                  : 'grid grid-cols-[auto_1fr] rounded-lg hover:bg-[#54ADFE] hover:text-white p-3 group'
               }
             >
               <img className="h-5 w-5 my-auto" src={HomeIcon} alt="" />
@@ -103,7 +107,7 @@ const Sidebar = () => {
           </li>
         </ul>
       </nav>
-      <Link className="grid grid-cols-[auto_1fr] mt-auto pb-10" to="/login">
+      <Link className="grid grid-cols-[auto_1fr] mt-auto pb-10" to="/">
         <img className="h-5 w-5 my-auto ml-9" src={LogoutIcone} alt="" />
         <button
           className="text-[16px] antialiased text-[#5c636c] mr-12"
