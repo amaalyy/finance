@@ -3,6 +3,7 @@ import axios from 'axios';
 import TransactionItem from './TransactionItem';
 
 const TransactionList = ({ forceRemount }) => {
+
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState(null);
 
@@ -22,7 +23,8 @@ const TransactionList = ({ forceRemount }) => {
     };
 
     fetchTransactions();
-  }, [forceRemount]); // Include forceRemount in the dependency array to trigger a re-fetch when it changes
+  }, [forceRemount]);
+
 
   const handelDeleteClick = async (id) => {
     try {

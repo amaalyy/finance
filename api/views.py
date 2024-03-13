@@ -187,14 +187,14 @@ def category_detail(request, category_id):
         return delete_category(request, category)
 
 def get_categories_list(request):
-    categories = Category.objects.filter(user=request.user)
+    categories = Category.objects.all()
     serializer = CategorySerializer(categories, many=True)
     return Response(serializer.data)
 
 def create_category(request):
     serializer = CategorySerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save(user=request.user)
+        serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

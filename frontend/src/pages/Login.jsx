@@ -35,13 +35,13 @@ const Login = () => {
 
   return (
     <div className="container mt-5">
-      <div className="">
+      <div className="p-5">
         <img
           className="w-full h-full absolute inset-0 -z-10"
           src={BackgroundImage}
           alt=""
         />
-        <div className="bg-white w-[450px] mt-4 ml-auto mr-11 px-16 pt-9 rounded-lg pb-16 shadow-xl">
+        <div className="bg-white w-[450px] mt-28 ml-auto mr-11 px-16 pt-9 rounded-lg pb-16 shadow-xl">
           <h2 className="text-[40px] text-blue text-center font-bold">Login</h2>
           {error && <p className="text-red-500 text-center mt-2">{error}</p>}
           <form onSubmit={handleSubmit}>
@@ -72,7 +72,6 @@ const Login = () => {
                   src={PasswordIcon}
                   alt=""
                 />
-
                 <input
                   placeholder="Type your password"
                   name="password"
