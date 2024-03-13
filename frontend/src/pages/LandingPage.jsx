@@ -77,11 +77,11 @@ function LandingPage() {
               We help you achieve your financial goals by <br />{' '}
               <div className="-translate-y-1">disciplined investments</div>
             </p>
-            <Link to="/aboutus">
+            <a href="#AboutUs">
               <div className="mb-[220px] inline-block ml-44 mt-[120px] rounded-full px-6 py-2 text-[20px] text-center bg-[#2DDA9B] hover:bg-[#2dda9bcf]">
                 Learn More
               </div>
-            </Link>
+            </a>
           </div>
           <div className="my-auto h-[550px] w-[550px]">
             <img className="" src={FinanceCoinIcon} alt="" />
@@ -213,15 +213,15 @@ function LandingPage() {
             </p>
           </div>
         </div>
-        <div className="container mx-auto px-4 py-8">
+        <div className="mb-11 container mx-auto px-4 py-8">
           <h2
-            className="text-center font-bold text-[50px] pt-28 -mt-14  mb-11"
+            className="text-center font-bold text-[50px] pt-28 -mt-14 mb-11"
             id="Contact Us"
           >
             Contact Us
           </h2>
           <div className="bg-slate-50 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-slate-50">
+            <div className="bg-slate-50 px-20 py-20 shadow-2xl">
               <h2 className="text-2xl font-bold mb-4">Our Information</h2>
               <p className="text-lg mb-4">
                 <strong>Address:</strong> R6JM+P5C, Rue du Lac Biwa, Tunis
@@ -242,21 +242,59 @@ function LandingPage() {
                 concerns you may have.
               </p>
             </div>
-            <div className="bg-slate-50">
-              <h2 className="text-2xl font-bold mb-4">Get in Touch</h2>
+            <div className="bg-slate-50 px-20 py-20 ">
+              <h2 className="text-2xl font-bold mb-4 ">Get in Touch</h2>
               <p className="text-lg mb-4">
                 Have a question or feedback? We'd love to hear from you! Send us
                 a message using the form below, and we'll get back to you as
                 soon as possible.
               </p>
               <form>
-                <label>Name</label>
-                <input type="text" name="user_name" />
-                <label>Email</label>
-                <input type="email" name="user_email" />
-                <label>Message</label>
-                <textarea name="message" />
-                <input type="submit" value="Send" />
+                <div className="mb-4">
+                  <label
+                    className="block text-lg font-semibold mb-2"
+                    htmlFor="name"
+                  >
+                    Your Name
+                  </label>
+                  <input
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2DDA9B]"
+                    type="text"
+                    id="name"
+                    name="name"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    className="block text-lg font-semibold mb-2"
+                    htmlFor="email"
+                  >
+                    Your Email
+                  </label>
+                  <input
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2DDA9B]"
+                    type="email"
+                    id="email"
+                    name="email"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label
+                    className="block text-lg font-semibold mb-2"
+                    htmlFor="message"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2DDA9B]"
+                    id="message"
+                    name="message"
+                    rows="4"
+                  ></textarea>
+                </div>
+                <button className="w-full bg-[#2DDA9B] hover:bg-[#2dda9bcf] text-white py-2 px-6 rounded-md">
+                  Send Message
+                </button>
               </form>
             </div>
           </div>
