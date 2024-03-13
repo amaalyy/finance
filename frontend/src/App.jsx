@@ -15,6 +15,7 @@ import { AuthProvider } from './contexts/AuthContext';
 function App() {
   return (
     <Router>
+
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
