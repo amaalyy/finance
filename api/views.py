@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.db.models import Sum
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -150,6 +151,13 @@ def getTransaction(request, pk):
     if request.method == 'DELETE':
         return deleteTransaction(request, pk)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_balance(request):
+    total_income = Transaction.objects.filter(user=request.user, transaction_type='IN').aggregate(Sum('amount'))['amount__sum'] or 0
+    total_expense = Transaction.objects.filter(user=request.user, transaction_type='EX').aggregate(Sum('amount'))['amount__sum'] or 0
+    balance = total_income - total_expense
+    return Response({'balance': balance, 'total_income': total_income, 'total_expense': total_expense})
 
 #############     category    #################
 

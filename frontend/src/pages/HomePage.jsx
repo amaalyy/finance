@@ -2,6 +2,12 @@ import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import TransactionList from '../components/TransactionList'
+import TransactionActions from '../components/TransactionActions'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import BalanceSummary from '../components/BalanceSummary';
+
 import Sidebar from '../components/Sidebar';
 import TransactionList from '../components/TransactionList';
 import TransactionActions from '../components/TransactionActions';
@@ -74,6 +80,7 @@ const HomePage = () => {
         {user ? (
           <div className="row-start-2">
             <p>Hello, you are logged in as {user.username}!</p>
+            <BalanceSummary forceRemount={forceRemount} />
             <TransactionActions onAddTransaction={handleAddTransaction} />
             <TransactionList />
             <p className="text-xl antialiased font-semibold ml-8 mt-4">

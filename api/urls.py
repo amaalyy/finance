@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.getRouts),
+    path('balance/', views.get_balance),
     path('transaction/', views.getTransactions),
     path('transaction/<str:pk>/', views.getTransaction),
     path('categories/', views.getCategories),
