@@ -73,10 +73,10 @@ function LandingPage() {
               <div className="translate-y-[170px]">Achieve</div> <br />{' '}
               Financial Freedom
             </h1>
-            <p className="ml-44 text-[25px] translate-y-[70px]">
+            <div className="ml-44 text-[25px] translate-y-[70px]">
               We help you achieve your financial goals by <br />{' '}
               <div className="-translate-y-1">disciplined investments</div>
-            </p>
+            </div>
             <Link to="/aboutus">
               <div className="mb-[220px] inline-block ml-44 mt-[120px] rounded-full px-6 py-2 text-[20px] text-center bg-[#2DDA9B] hover:bg-[#2dda9bcf]">
                 Learn More
