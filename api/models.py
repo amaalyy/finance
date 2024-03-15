@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Category(models.Model):
@@ -35,4 +36,51 @@ class Transaction(models.Model):
 
   def __str__(self):
     return (f"{self.transaction_type} {self.description[0:40]}")
-  
+
+@receiver(post_save, sender=User)
+def create_default_categories(sender, instance, created, **kwargs):
+    """
+    Signals receiver to create default categories for a new user.
+    """
+    if created:
+        default_categories = [
+            'Salary',
+            'Rent',
+            'Groceries',
+            'Transportation',
+            'Utilities',
+            'Health',
+            'Entertainment',
+            'Insurance',
+            'Education',
+            'Other',
+            'Gym',
+            'Phone',
+            'Internet',
+            'Cable',
+            'Water',
+            'Electricity',
+            'Gas',
+            'Car',
+            'Public Transportation',
+            'Car Insurance',
+            'Gasoline',
+            'Travel',
+            'Dental',
+            'Doctor',
+            'Pharmacy',
+            'Hospital',
+            'Books',
+            'Tuition',
+            'Supplies',
+            'Other',
+            'Eating Out',
+            'Movies',
+            'Concerts',
+            'Theater',
+            'Sports',
+            
+        ]
+        for category_name in default_categories:
+            if not Category.objects.filter(name=category_name).exists():
+                Category.objects.create(name=category_name)
