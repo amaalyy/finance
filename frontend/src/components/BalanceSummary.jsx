@@ -50,6 +50,7 @@ const BalanceSummary = ({ forceRemount }) => {
       },
     ],
   };
+
   const chartOptions = {
     scales: {
       y: {
@@ -57,22 +58,32 @@ const BalanceSummary = ({ forceRemount }) => {
       },
     },
   };
-    
 
   return (
     <Card title="Balance Summary">
       {error && <p>Error fetching balance: {error}</p>}
       {balanceData && (
         <>
-        <div>
-          <p>Total Income: TND {balanceData.total_income}</p>
-          <p>Total Expense: TND {balanceData.total_expense}</p>
-          <p>Balance: TND {balanceData.balance}</p>
-        </div>
-        <div className="h-[600px] w-[600px] bg-white">
+          <div>
+            <p>Total Income: TND {balanceData.total_income}</p>
+            <p>Total Expense: TND {balanceData.total_expense}</p>
+            <p>Balance: TND {balanceData.balance}</p>
+          </div>
+          <div>
+            <h3>Expenses by Category:</h3>
+            <ul>
+              {balanceData.expenses_by_category &&
+                Object.entries(balanceData.expenses_by_category).map(([category, expense]) => (
+                  <li key={category}>
+                    {category}: TND {expense}
+                  </li>
+                ))}
+            </ul>
+          </div>
+          <div className="h-[600px] w-[600px] bg-white">
             <Bar data={chartData} options={chartOptions} />
           </div>
-          </>
+        </>
       )}
     </Card>
   );
