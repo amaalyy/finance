@@ -90,20 +90,7 @@ const Login = () => {
               Login
             </button>
           </form>
-          <div className="text-center text-sm pt-6 text-[#798995]">
-            Or login with
-            <div className="flex justify-evenly mt-6">
-              <Link to="https://www.facebook.com/">
-                <img className="h-11 w-11" src={FacebookIcon} alt="" />
-              </Link>
-              <Link to="https://mail.google.com/mail/&ogbl">
-                <img className="h-11 w-11" src={GmailIcon} alt="" />
-              </Link>
-              <Link to="https://github.com/">
-                <img className="h-11 w-11" src={GithubIcon} alt="" />
-              </Link>
-            </div>
-          </div>
+          
           <p className="mt-10 text-center antialiased">
             Don't have an account??{' '}
             <Link className=" text-blue hover:text-hover-btn" to="/signup">
