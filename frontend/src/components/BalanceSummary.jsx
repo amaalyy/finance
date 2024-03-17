@@ -4,7 +4,7 @@ import axios from 'axios';
 import Card from './Card';
 import { Bar } from 'react-chartjs-2';
 
-const BalanceSummary = (forceRemount) => {
+const BalanceSummary = ({ forceRemount }) => {
   const [balanceData, setBalanceData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -50,31 +50,29 @@ const BalanceSummary = (forceRemount) => {
       },
     ],
   };
-const chartOptions = {
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
-        },
+  const chartOptions = {
+    scales: {
+      y: {
+        beginAtZero: true,
       },
-    ],
-  },
-};
+    },
+  };
     
 
   return (
     <Card title="Balance Summary">
       {error && <p>Error fetching balance: {error}</p>}
       {balanceData && (
-        <><div>
+        <>
+        <div>
           <p>Total Income: TND {balanceData.total_income}</p>
           <p>Total Expense: TND {balanceData.total_expense}</p>
           <p>Balance: TND {balanceData.balance}</p>
         </div>
         <div className="h-[600px] w-[600px] bg-white">
             <Bar data={chartData} options={chartOptions} />
-          </div></>
+          </div>
+          </>
       )}
     </Card>
   );
