@@ -58,7 +58,6 @@ const AddIncomepage = () => {
           />
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

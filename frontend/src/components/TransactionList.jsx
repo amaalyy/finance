@@ -42,7 +42,7 @@ const TransactionList = ({ forceRemount }) => {
   }
   return (
     <div>
-      <h2>Transactions</h2>
+      <h2 className='text-xl antialiased font-semibold ml-8 mt-4'>Transactions</h2>
       {error && <p>Error fetching transactions: {error}</p>}
       {transactions.map((transaction) => (
         <TransactionItem

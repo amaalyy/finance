@@ -34,7 +34,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-20">
       <div className="p-5">
         <img
           className="w-full h-full absolute inset-0 -z-10"
@@ -46,7 +46,9 @@ const Login = () => {
           {error && <p className="text-red-500 text-center mt-2">{error}</p>}
           <form onSubmit={handleSubmit}>
             <div className="pb-3 mt-6">
-              <label htmlFor="username" className='antialiased'>Username</label>
+              <label htmlFor="username" className="antialiased">
+                Username
+              </label>
               <div className="grid grid-cols-[auto_1fr] bg-gray-100 p-2.5 rounded-md mt-1.5 antialiased">
                 <img
                   className="my-auto h-5 w-5 bg-gray-100"
@@ -65,7 +67,9 @@ const Login = () => {
               </div>
             </div>
             <div className="form-group pb-3 mt-3">
-              <label htmlFor="password" className='antialiased'>Password</label>
+              <label htmlFor="password" className="antialiased">
+                Password
+              </label>
               <div className="grid grid-cols-[auto_1fr] bg-gray-100 p-2.5 rounded-md mt-1.5 antialiased">
                 <img
                   className="my-auto h-5 w-5 bg-gray-100"
@@ -90,21 +94,7 @@ const Login = () => {
               Login
             </button>
           </form>
-          <div className="text-center text-sm pt-6 text-[#798995]">
-            Or login with
-            <div className="flex justify-evenly mt-6">
-              <Link to="https://www.facebook.com/">
-                <img className="h-11 w-11" src={FacebookIcon} alt="" />
-              </Link>
-              <Link to="https://mail.google.com/mail/&ogbl">
-                <img className="h-11 w-11" src={GmailIcon} alt="" />
-              </Link>
-              <Link to="https://github.com/">
-                <img className="h-11 w-11" src={GithubIcon} alt="" />
-              </Link>
-            </div>
-          </div>
-          <p className="mt-10 text-center antialiased">
+          <p className="mt-20 mb-3 text-center antialiased">
             Don't have an account??{' '}
             <Link className=" text-blue hover:text-hover-btn" to="/signup">
               Signup now

@@ -69,7 +69,7 @@ function LandingPage() {
       <div>
         <div className="grid grid-cols-[auto_auto] bg-gradient-to-r from-[#4690CD] to-[#6EB7E4] text-white antialiased">
           <div className="col-span-">
-            <h1 className="text-[84px] ml-44 translate-y-[50px] font-bold">
+            <h1 className="2xl:text-[84px] lg:text-[75px] ml-44 translate-y-[50px] font-bold">
               <div className="translate-y-[170px]">Achieve</div> <br />{' '}
               Financial Freedom
             </h1>
@@ -81,7 +81,7 @@ function LandingPage() {
               <div className="mb-[220px] inline-block ml-44 mt-[120px] rounded-full px-6 py-2 text-[20px] text-center bg-[#2DDA9B] hover:bg-[#2dda9bcf]">
                 Learn More
               </div>
-            </a>
+            </Link>
           </div>
           <div className="my-auto h-[550px] w-[550px]">
             <img className="" src={FinanceCoinIcon} alt="" />
