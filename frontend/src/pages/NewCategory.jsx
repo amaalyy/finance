@@ -1,26 +1,27 @@
-import React from 'react';
-import { useContext, useState } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Sidebar from '../components/Sidebar';
-import TransactionList from '../components/TransactionList';
-import TransactionActions from '../components/TransactionActions';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Chart as ChartJS } from 'chart.js/auto';
-import { Bar, Doughnut } from 'react-chartjs-2';
 import Category from '../components/Category';
+import DeleteCategoryButton from '../components/DeleteCategoryButton'; // Import the DeleteCategoryButton component
+import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
 
 function NewCategory() {
   const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    onUpdateCategories();
+  }, []);
+
   const onUpdateCategories = async () => {
     try {
-      // Fetch the updated list of categories from the server
-      const response = await axios.get('http://127.0.0.1:8000/api/categories');
-      const updatedCategories = response.data;
-
-      // Update the categories state with the new list of categories
-      setCategories(updatedCategories);
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://127.0.0.1:8000/api/categories/', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const categoriesData = response.data;
+      setCategories(categoriesData);
     } catch (error) {
       console.error('Error updating categories:', error);
     }
@@ -31,7 +32,19 @@ function NewCategory() {
       <Sidebar />
       <Header title="New Category" />
       <div className="max-w-md w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <Category onUpdateCategories={onUpdateCategories} />
+        <Category onUpdateCategories={onUpdateCategories} />
+        <h2 className="text-lg font-bold mt-4">All Categories</h2>
+        <ul>
+          {categories.map(category => (
+            <li key={category.id} className="flex items-center justify-between">
+              {category.name}
+              <DeleteCategoryButton
+                categoryId={category.id}
+                onUpdateCategories={onUpdateCategories}
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
