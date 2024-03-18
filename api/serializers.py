@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer ,CharField
+from rest_framework import serializers
 from .models import Transaction, Category
 
 
@@ -12,3 +13,11 @@ class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+
+class IncomeReportSerializer(serializers.Serializer):
+    category = serializers.CharField()
+    total_amount = serializers.DecimalField(max_digits=10, decimal_places=2)
+
+class ExpenseReportSerializer(serializers.Serializer):
+    category = serializers.CharField()
+    total_amount = serializers.DecimalField(max_digits=10, decimal_places=2)

@@ -7,6 +7,7 @@ from django.dispatch import receiver
 class Category(models.Model):
   name = models.CharField(max_length=100)
   
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
       return self.name
@@ -82,5 +83,5 @@ def create_default_categories(sender, instance, created, **kwargs):
             
         ]
         for category_name in default_categories:
-            if not Category.objects.filter(name=category_name).exists():
-                Category.objects.create(name=category_name)
+            if not Category.objects.filter(name=category_name ).exists():
+                Category.objects.create(name=category_name, user = sender)

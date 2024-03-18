@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from .models import Transaction, Category
-from .serializers import TransactionsSerializer, CategorySerializer
+from .serializers import TransactionsSerializer, CategorySerializer ,IncomeReportSerializer, ExpenseReportSerializer
 from datetime import timedelta
 from rest_framework import status
 from django.contrib.auth import authenticate, login
@@ -187,11 +187,12 @@ def category_detail(request, category_id):
         return delete_category(request, category)
 
 def get_categories_list(request):
-    categories = Category.objects.all()
+    categories = Category.objects.filter(user=request.user)
     serializer = CategorySerializer(categories, many=True)
     return Response(serializer.data)
 
 def create_category(request):
+    request.data['user'] = request.user.id
     serializer = CategorySerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -322,3 +323,37 @@ def deleteTransaction(request, pk):
     transaction.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+# ############  Reports ############################
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_income_report(request):
+    user = request.user
+    income_transactions = Transaction.objects.filter(user=user, transaction_type='IN')
+    categories = Category.objects.filter(user=user).distinct()
+    
+    income_data = []
+    for category in categories:
+        total_amount = income_transactions.filter(category=category).aggregate(total_amount=Sum('amount'))['total_amount'] or 0
+        if total_amount != 0:
+            income_data.append({'category': category.name, 'total_amount': total_amount})
+
+    serializer = IncomeReportSerializer(income_data, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_expense_report(request):
+    user = request.user
+    expense_transactions = Transaction.objects.filter(user=user, transaction_type='EX')
+    categories = Category.objects.filter(user=user).distinct()
+    
+    expense_data = []
+    for category in categories:
+        total_amount = expense_transactions.filter(category=category).aggregate(total_amount=Sum('amount'))['total_amount'] or 0
+        if total_amount != 0:
+            expense_data.append({'category': category.name, 'total_amount': total_amount})
+
+    serializer = ExpenseReportSerializer(expense_data, many=True)
+    return Response(serializer.data)
