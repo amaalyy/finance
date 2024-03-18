@@ -105,17 +105,27 @@ const Sidebar = () => {
               <p className="text-[18px] antialiased my-auto ml-3">Settings</p>
             </NavLink>
           </li>
+          <li>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive
+                ? 'grid grid-cols-[auto_1fr] rounded-lg bg-[#54ADFE] text-white p-3 mt-2'
+                : 'grid grid-cols-[auto_1fr] rounded-lg hover:bg-[#54ADFE] hover:text-white p-3 mt-2'
+            }
+          >
+            <img className="h-5 w-5 my-auto" src={LogoutIcone} alt="" />
+            <button
+              className="text-[16px] antialiased text-[#5c636c] mr-12"
+              onClick={logout}
+            >
+              Logout
+            </button>
+          </NavLink>
+
+          </li>
         </ul>
       </nav>
-      <Link className="grid grid-cols-[auto_1fr] mt-auto pb-10" to="/">
-        <img className="h-5 w-5 my-auto ml-9" src={LogoutIcone} alt="" />
-        <button
-          className="text-[16px] antialiased text-[#5c636c] mr-12"
-          onClick={logout}
-        >
-          Logout
-        </button>
-      </Link>
     </div>
   );
 };
