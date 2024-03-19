@@ -37,11 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # api for transaction and user auth
     'api.apps.ApiConfig',
-
     'rest_framework',
-
     'rest_framework_simplejwt',
     'corsheaders',
 
@@ -54,8 +51,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),  # example: 1 day for access token
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),  # 30 days for refresh token
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
 }
 
 
@@ -98,12 +95,12 @@ WSGI_APPLICATION = 'finance_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE':'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'finance-web_app',
         'USER': 'finance_dev_user',
         'PASSWORD': 'finance_password',
         'HOST': 'localhost',
-        'PORT' : '3306',
+        'PORT': '3306',
     }
 }
 # Password validation
