@@ -31,8 +31,7 @@ def getRouts(request):
                         "category": 0,
                         "description": "",
                         },
-               'description':
-               'Creates new transaction with data sent in post request'},
+               'description': 'Creates new transaction with data sent in post request'},
               {'Endpoint': '/transaction/id/',
                'method': 'PUT',
                'body': {"transaction_type": "",

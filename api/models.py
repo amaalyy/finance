@@ -5,38 +5,42 @@ from django.dispatch import receiver
 
 
 class Category(models.Model):
-  name = models.CharField(max_length=100)
-  
-  user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
 
-  def __str__(self):
-      return self.name
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 class Transaction(models.Model):
-  INCOME = 'IN'
-  EXPENSE = 'EX'
-  TRANSACTION_CHOICES = [
-      (INCOME, 'Income'),
-      (EXPENSE, 'Expense'),
-  ]
-    
-  transaction_type = models.CharField(max_length=2, choices=TRANSACTION_CHOICES)
+    INCOME = 'IN'
+    EXPENSE = 'EX'
+    TRANSACTION_CHOICES = [
+        (INCOME, 'Income'),
+        (EXPENSE, 'Expense'),
+    ]
 
-  amount = models.DecimalField(max_digits=8,decimal_places=2, verbose_name = "amount", null=False)
+    transaction_type = models.CharField(
+        max_length=2, choices=TRANSACTION_CHOICES)
 
+    amount = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        verbose_name="amount",
+        null=False)
 
-  category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
+    description = models.TextField(null=True, blank=True)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
 
-  description  = models.TextField(null=True, blank=True)
-  updated = models.DateTimeField(auto_now=True)
-  created = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-  user = models.ForeignKey(User, on_delete=models.CASCADE)
+    def __str__(self):
+        return (f"{self.transaction_type} {self.description[0:40]}")
 
-  def __str__(self):
-    return (f"{self.transaction_type} {self.description[0:40]}")
 
 @receiver(post_save, sender=User)
 def create_default_categories(sender, instance, created, **kwargs):
@@ -80,8 +84,8 @@ def create_default_categories(sender, instance, created, **kwargs):
             'Concerts',
             'Theater',
             'Sports',
-            
+
         ]
         for category_name in default_categories:
-            if not Category.objects.filter(name=category_name ).exists():
-                Category.objects.create(name=category_name, user = sender)
+            if not Category.objects.filter(name=category_name).exists():
+                Category.objects.create(name=category_name, user=sender)
