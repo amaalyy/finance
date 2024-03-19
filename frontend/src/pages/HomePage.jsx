@@ -10,6 +10,7 @@ import BalanceSummary from '../components/BalanceSummary';
 import Sidebar from '../components/Sidebar';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar, Doughnut } from 'react-chartjs-2';
+import TransactionForm from '../components/TransactionForm';
 
 const HomePage = () => {
   const { user, loading } = useContext(AuthContext);
@@ -83,7 +84,6 @@ const HomePage = () => {
       <div className="bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
         {user ? (
           <div className="row-start-2">
-            <p>Hello, you are logged in as {user.username}!</p>
             <p className="text-xl antialiased font-semibold ml-8 mt-4">
               Last Transaction
             </p>
@@ -108,7 +108,7 @@ const HomePage = () => {
               </div>
             </div>
             <div className='grid grid-cols-2'>
-              <TransactionActions onAddTransaction={handleAddTransaction} />
+              <TransactionForm onAddTransaction={handleAddTransaction} />
               <BalanceSummary forceRemount={forceRemount} />
             </div>
             <TransactionList />
