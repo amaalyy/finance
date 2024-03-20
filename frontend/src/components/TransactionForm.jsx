@@ -18,8 +18,8 @@ const TransactionForm = ({ onAddTransaction }) => {
       const token = localStorage.getItem('token');
       const response = await axios.get('http://127.0.0.1:8000/api/categories', {
         headers: {
-          Authorization: `Bearer ${token}`,
-        },
+          Authorization: `Bearer ${token}`
+        }
       });
       if (response.status !== 200) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -46,7 +46,7 @@ const TransactionForm = ({ onAddTransaction }) => {
       description,
       amount: transactionAmount,
       category,
-      transaction_type: transactionType,
+      transaction_type: transactionType
     };
 
     // Call the callback function from the parent component
@@ -60,42 +60,38 @@ const TransactionForm = ({ onAddTransaction }) => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <h3 className="text-xl font-semibold mb-4">Add New Transaction</h3>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-          Description:
+    <div className="ml-8 antialiased">
+      <h3 className="mb-6 text-xl font-semibold">Add New Transaction</h3>
+      <div className="w-[820px] h-[400px] px-11 py-5 grid grid-rows-[1fr_1fr_1fr_1fr] mb-4 bg-white rounded-3xl drop-shadow-xl">
+        <label className="mb-2 text-lg">
+          <div className="my-2 font-medium">Description</div>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="description"
+            className="w-[450px] h-[40px] px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2DDA9B]"
+
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </label>
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">
-          Amount:
+        <label className="text-lg">
+          <div className="my-2 font-medium">Amount</div>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="amount"
+            className="w-[450px] h-[40px] px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2DDA9B]"
+
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
         </label>
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category">
-          Category:
+        <label className="text-lg">
+          <div className="my-2 font-medium">Category</div>
           <select
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="category"
+            className="w-[450px] h-[40px] px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2DDA9B]"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option value="">---------------</option>
+            <option value=""></option>
+
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
@@ -103,29 +99,21 @@ const TransactionForm = ({ onAddTransaction }) => {
             ))}
           </select>
         </label>
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="transactionType">
-          Transaction Type:
+        <label className="text-lg">
+          <div className="my-2 font-medium">Transaction Type</div>
           <select
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="transactionType"
+            className="w-[450px] h-[40px] px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2DDA9B]"
             value={transactionType}
             onChange={(e) => setTransactionType(e.target.value)}
           >
-            <option value="">----------</option>
-            <option value="EX">Expense</option>
-            <option value="IN">Income</option>
+            <option value=""></option>
+            <option value="EX">Expense </option>
+            <option value="IN">Income </option>
           </select>
         </label>
-      </div>
-      <div className="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-      <button
-        
-        onClick={handleAddTransaction}
-      >
-        Add Transaction
-      </button>
+        <button className="rounded-full w-52 p-3 bg ml-6 bg-[#2DDA9B] text-white hover:bg-[#2dda9bcf] -translate-y-[45px] translate-x-[480px]" onClick={handleAddTransaction}>
+          Add Transaction
+        </button>
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ import axios from 'axios';
 import TransactionItem from './TransactionItem';
 
 const TransactionList = ({ forceRemount }) => {
-
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState(null);
 
@@ -11,11 +10,14 @@ const TransactionList = ({ forceRemount }) => {
     const fetchTransactions = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://127.0.0.1:8000/api/transaction/', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          'http://127.0.0.1:8000/api/transaction/',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
         setTransactions(response.data);
       } catch (error) {
         setError(error.message);
@@ -25,36 +27,40 @@ const TransactionList = ({ forceRemount }) => {
     fetchTransactions();
   }, [forceRemount]);
 
-
   const handelDeleteClick = async (id) => {
     try {
       const token = localStorage.getItem('token');
       await axios.delete(`http://127.0.0.1:8000/api/transaction/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
-        },
+          Authorization: `Bearer ${token}`
+        }
       });
-      setTransactions(prevTransactions => prevTransactions.filter(transaction => transaction.id !== id));
-
+      setTransactions((prevTransactions) =>
+        prevTransactions.filter((transaction) => transaction.id !== id)
+      );
     } catch (error) {
       setError(error.message);
     }
-  }
+  };
   return (
     <div>
-      <h2>Transactions</h2>
+      <h2 className="text-xl antialiased font-semibold ml-8 my-8">
+        Transactions
+      </h2>
       {error && <p>Error fetching transactions: {error}</p>}
-      {transactions.map((transaction) => (
-        <TransactionItem
-          key={transaction.id}
-          id={transaction.id}
-          transactionType={transaction.transaction_type}
-          amount={transaction.amount}
-          category={transaction.category_name}
-          description={transaction.description}
-          onDeleteClick={handelDeleteClick}
-        />
-      ))}
+      <div className='grid grid-cols-[400px_400px_400px] gap-8 mb-8'>
+        {transactions.map((transaction) => (
+          <TransactionItem
+            key={transaction.id}
+            id={transaction.id}
+            transactionType={transaction.transaction_type}
+            amount={transaction.amount}
+            category={transaction.category_name}
+            description={transaction.description}
+            onDeleteClick={handelDeleteClick}
+          />
+        ))}
+      </div>
     </div>
   );
 };

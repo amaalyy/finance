@@ -3,11 +3,10 @@ import { AuthContext } from '../contexts/AuthContext';
 import HomeIcon from '/home.svg';
 import IncomeIcone from '/income.svg';
 import ExpenseIcone from '/expenses.svg';
-import SettingsIcon from '/Settings.svg';
 import ReportIcon from '/report.svg';
 import CategoryIcon from '/Category.svg';
 import LogoutIcone from '/Logout.svg';
-import LogoIcone from '/Logo.svg';
+import LogoIcon from '/Logo.svg';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
@@ -16,9 +15,9 @@ const Sidebar = () => {
   return (
     <div className="grid grid-rows-[auto_auto_auto] bg-white p-3.5 shadow-sm row-span-2 h-screen sticky top-0">
       <NavLink
-        className="text-center mx-3 text-[28px] antialiased m-6 w-22 h-12 "
-        to="/home"
-      >
+        to="/"
+        className="grid grid-cols-[auto_auto_1fr] mx-3 text-[25px] mt-6">
+        <img className="h-8 w-8 mt-1" src={LogoIcon} alt="" />
         Wealthwise
       </NavLink>
       <nav className="text-[#5c636c]">
@@ -91,38 +90,6 @@ const Sidebar = () => {
                 New Category
               </p>
             </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/settings"
-              className={({ isActive }) =>
-                isActive
-                  ? 'grid grid-cols-[auto_1fr] rounded-lg bg-[#54ADFE] text-white p-3 mt-2'
-                  : 'grid grid-cols-[auto_1fr] rounded-lg hover:bg-[#54ADFE] hover:text-white p-3 mt-2'
-              }
-            >
-              <img className="h-5 w-5 my-auto" src={SettingsIcon} alt="" />
-              <p className="text-[18px] antialiased my-auto ml-3">Settings</p>
-            </NavLink>
-          </li>
-          <li>
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive
-                ? 'grid grid-cols-[auto_1fr] rounded-lg bg-[#54ADFE] text-white p-3 mt-2'
-                : 'grid grid-cols-[auto_1fr] rounded-lg hover:bg-[#54ADFE] hover:text-white p-3 mt-2'
-            }
-          >
-            <img className="h-5 w-5 my-auto" src={LogoutIcone} alt="" />
-            <button
-              className="text-[16px] antialiased text-[#5c636c] mr-12"
-              onClick={logout}
-            >
-              Logout
-            </button>
-          </NavLink>
-
           </li>
         </ul>
       </nav>

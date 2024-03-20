@@ -82,7 +82,6 @@ function ReportPage() {
         </div>
       </div>
       <Footer />
-    </div>
   );
 }
 

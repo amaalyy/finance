@@ -7,7 +7,6 @@ import AddIncomePage from './pages/AddIncomepage';
 import AddExpensesPage from './pages/AddExpensesPage';
 import ReportPage from './pages/ReportPage';
 import NewCategory from './pages/NewCategory';
-import SettingsPage from './pages/SettingsPage';
 import LandingPage from './pages/LandingPage';
 
 import { AuthProvider } from './contexts/AuthContext';
@@ -24,7 +23,6 @@ function App() {
         <Route path="/expenses" element={<AddExpensesPage />} />
         <Route path="/report" element={<ReportPage />} />
         <Route path="/category" element={<NewCategory />} />
-        <Route path="/settings" element={<SettingsPage />} />
         <Route path="/" element={<LandingPage />} />
       </Routes>
     </Router>
