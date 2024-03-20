@@ -70,7 +70,7 @@ const Signup = () => {
               </p>
               <Link
                 className="bg-blue text-white w-28 p-1.5 rounded-full hover:bg-hover-btn block mx-auto"
-                to="/"
+                to="/login"
               >
                 Login
               </Link>
