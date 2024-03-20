@@ -93,6 +93,15 @@ const Sidebar = () => {
           </li>
         </ul>
       </nav>
+            <Link className="grid grid-cols-[auto_1fr] mt-auto pb-10" to="/">
+        <img className="h-5 w-5 my-auto ml-9" src={LogoutIcone} alt="" />
+        <button
+          className="text-[16px] antialiased text-[#5c636c] mr-12"
+          onClick={logout}
+        >
+          Logout
+        </button>
+      </Link>
     </div>
   );
 };
