@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.http import HttpRequest
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from .pagination import CustomPagination
 from .models import Transaction, Category
 from .serializers import (TransactionsSerializer,
                           CategorySerializer,
@@ -169,7 +171,16 @@ def category_detail(request, category_id):
 
 
 def get_categories_list(request):
+    paginator = CustomPagination()
     categories = Category.objects.filter(user=request.user)
+
+    # Check if pagination parameters exist in the request
+    if 'page' in request.query_params or 'page_size' in request.query_params:
+        result_page = paginator.paginate_queryset(categories, request)
+        serializer = CategorySerializer(result_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
+
+    # If no pagination parameters, return all categories without pagination
     serializer = CategorySerializer(categories, many=True)
     return Response(serializer.data)
 
@@ -281,9 +292,18 @@ def check_auth(request):
     return Response({'authenticated': True, 'user': user_data})
 
 
-def getTransactionList(request):
+def getTransactionList(request: HttpRequest):
+    paginator = CustomPagination()
     transactions = Transaction.objects.filter(
         user=request.user).order_by('-updated')
+
+    # Check if pagination parameters exist in the request
+    if 'page' in request.query_params or 'page_size' in request.query_params:
+        result_page = paginator.paginate_queryset(transactions, request)
+        serializer = TransactionsSerializer(result_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
+
+    # If no pagination parameters, return all transactions without pagination
     serializer = TransactionsSerializer(transactions, many=True)
     return Response(serializer.data)
 
