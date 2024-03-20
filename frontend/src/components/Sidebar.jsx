@@ -14,9 +14,9 @@ import { NavLink } from 'react-router-dom';
 const Sidebar = () => {
   const { logout } = useContext(AuthContext);
   return (
-    <div className="grid grid-rows-[250px_auto_auto] bg-white px-3.5 shadow-sm row-span-2 h-screen sticky top-0">
+    <div className="grid grid-rows-[auto_auto_auto] bg-white p-3.5 shadow-sm row-span-2 h-screen sticky top-0">
       <NavLink
-        className="grid grid-cols-[auto_auto_1fr] mx-3 text-[28px] antialiased mt-6"
+        className="text-center mx-3 text-[28px] antialiased m-6 w-22 h-12 "
         to="/home"
       >
         Wealthwise

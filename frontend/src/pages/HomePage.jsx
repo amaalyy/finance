@@ -79,19 +79,17 @@ const HomePage = () => {
   return (
     <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] h-screen">
       <Sidebar />
-      <Header title="Dashboard" />
-      <div className="bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
-        <h2>Welcome to the Home Page</h2>
+      
+      <div className="">
         {user ? (
           <div className="row-start-2">
-            <p>Hello, you are logged in as {user.username}!</p>
             <BalanceSummary forceRemount={forceRemount} />
             <TransactionActions onAddTransaction={handleAddTransaction} />
             <TransactionList />
             <p className="text-xl antialiased font-semibold ml-8 mt-4">
               Last Transaction
             </p>
-            <div className="text-white antialiased grid grid-cols-[400px_400px_400px] mb-8 px-7 gap-8">
+            <div className="text-white antialiased grid grid-cols-[auto_auto_auto] mb-8 px-7 gap-8">
               {/* Your other components */}
             </div>
             <div className="grid grid-cols-[auto_1fr]">

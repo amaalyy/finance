@@ -31,12 +31,12 @@ function NewCategory() {
     <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] h-screen bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
       <Sidebar />
       <Header title="New Category" />
-      <div className="max-w-md w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <div className="w-full bg-white shadow-md rounded p-8 mb-4">
         <Category onUpdateCategories={onUpdateCategories} />
         <h2 className="text-lg font-bold mt-4">All Categories</h2>
         <ul>
           {categories.map(category => (
-            <li key={category.id} className="flex items-center justify-between">
+            <li key={category.id} className="flex items-center justify-between mt-3">
               {category.name}
               <DeleteCategoryButton
                 categoryId={category.id}

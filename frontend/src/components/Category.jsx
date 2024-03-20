@@ -30,7 +30,7 @@ const Category = ({ onUpdateCategories }) => {
   };
 
   return (
-    <div>
+    <div className='mt-5'>
       <h3>Add New Category</h3>
       <input
         type="text"

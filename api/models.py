@@ -87,5 +87,5 @@ def create_default_categories(sender, instance, created, **kwargs):
 
         ]
         for category_name in default_categories:
-            if not Category.objects.filter(name=category_name).exists():
-                Category.objects.create(name=category_name, user=sender)
+            if not Category.objects.filter(name=category_name, user=instance).exists():
+                Category.objects.create(name=category_name, user=instance)
