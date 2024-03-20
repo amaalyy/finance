@@ -106,7 +106,7 @@ const HomePage = () => {
               <TransactionForm onAddTransaction={handleAddTransaction} />
               <BalanceSummary forceRemount={forceRemount} />
             </div>
-            <TransactionList />
+            <TransactionList forceRemount={forceRemount}/>
           </div>
         ) : (
           <p>You are not logged in.</p>
