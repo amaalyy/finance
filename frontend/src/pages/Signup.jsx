@@ -52,8 +52,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="p-5">
+    <div className="container">
+      <div className="p-7">
         <img
           className="w-full h-full absolute inset-0 -z-10"
           src={BackgroundImage}
