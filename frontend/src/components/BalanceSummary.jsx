@@ -27,32 +27,36 @@ const BalanceSummary = ({ forceRemount }) => {
   }, [forceRemount]);
 
   const chartData = {
-    labels: ['Total Income', 'Total Expense', 'Balance'],
+    labels: ['Total Income', 'Total Expense'],
     datasets: [
       {
         label: 'TND', // Tunisian Dinar
-        backgroundColor: ['#FFC6FE', '#A0C4FF', '#9BF6FF'],
+        backgroundColor: ['#3AE43A', '#EA1C00'],
         borderWidth: 1,
         data: [
           balanceData ? balanceData.total_income : 0,
           balanceData ? balanceData.total_expense : 0,
-          balanceData ? balanceData.balance : 0
+          // balanceData ? balanceData.balance : 0
         ]
       }
     ]
   };
-  const chartOptions = {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true
-          }
-        }
-      ]
+const chartOptions = {
+  plugins: {
+    title: {
+      display: true,
+      text: `balance ${balanceData ? balanceData.balance : 0}`,
+      font: {
+        size: 26
+      }
+    },
+  },
+  scales: {
+    y: {
+      beginAtZero: true
     }
-  };
-
+  }
+};
 
   return (
     <div className=''>
