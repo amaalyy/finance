@@ -4,7 +4,7 @@ import axios from 'axios';
 import Card from './Card';
 import { Doughnut } from 'react-chartjs-2';
 
-const BalanceSummary = (forceRemount) => {
+const BalanceSummary = ({ forceRemount }) => {
   const [balanceData, setBalanceData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -53,6 +53,7 @@ const BalanceSummary = (forceRemount) => {
     }
   };
 
+
   return (
     <div className=''>
       {error && <p>Error fetching balance: {error}</p>}
@@ -60,6 +61,7 @@ const BalanceSummary = (forceRemount) => {
         <>
           <div className="h-[400px] w-[400px] p-6 ml-[135px] mt-[52px] bg-white rounded-3xl drop-shadow-xl">
             <Doughnut data={chartData} options={chartOptions} />
+
           </div>
         </>
       )}

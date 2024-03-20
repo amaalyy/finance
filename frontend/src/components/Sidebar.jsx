@@ -13,11 +13,10 @@ import { NavLink } from 'react-router-dom';
 const Sidebar = () => {
   const { logout } = useContext(AuthContext);
   return (
-    <div className="grid grid-rows-[250px_auto_auto] bg-white px-3.5 shadow-sm row-span-2 h-screen sticky top-0">
+    <div className="grid grid-rows-[auto_auto_auto] bg-white p-3.5 shadow-sm row-span-2 h-screen sticky top-0">
       <NavLink
         to="/"
-        className="grid grid-cols-[auto_auto_1fr] mx-3 text-[25px] mt-6"
-      >
+        className="grid grid-cols-[auto_auto_1fr] mx-3 text-[25px] mt-6">
         <img className="h-8 w-8 mt-1" src={LogoIcon} alt="" />
         Wealthwise
       </NavLink>
@@ -94,15 +93,6 @@ const Sidebar = () => {
           </li>
         </ul>
       </nav>
-      <Link className="grid grid-cols-[auto_1fr] mt-auto pb-10" to="/">
-        <img className="h-5 w-5 my-auto ml-9" src={LogoutIcone} alt="" />
-        <button
-          className="text-[16px] antialiased text-[#5c636c] mr-12"
-          onClick={logout}
-        >
-          Logout
-        </button>
-      </Link>
     </div>
   );
 };

@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const TransactionForm = ({ onAddTransaction }) => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
-  const [transactionType, setTransactionType] = useState(''); // Assuming transactionType is a state variable
+  const [transactionType, setTransactionType] = useState('');
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
 
@@ -21,7 +21,6 @@ const TransactionForm = ({ onAddTransaction }) => {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log(response);
       if (response.status !== 200) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -47,7 +46,7 @@ const TransactionForm = ({ onAddTransaction }) => {
       description,
       amount: transactionAmount,
       category,
-      transaction_type: transactionType // corrected variable name
+      transaction_type: transactionType
     };
 
     // Call the callback function from the parent component
@@ -57,7 +56,7 @@ const TransactionForm = ({ onAddTransaction }) => {
     setDescription('');
     setAmount('');
     setCategory('');
-    setTransactionType('EX'); // Clear transaction_type if needed
+    setTransactionType('EX');
   };
 
   return (
@@ -68,6 +67,7 @@ const TransactionForm = ({ onAddTransaction }) => {
           <div className="my-2 font-medium">Description</div>
           <input
             className="w-[450px] h-[40px] px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2DDA9B]"
+
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -77,6 +77,7 @@ const TransactionForm = ({ onAddTransaction }) => {
           <div className="my-2 font-medium">Amount</div>
           <input
             className="w-[450px] h-[40px] px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2DDA9B]"
+
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
@@ -90,6 +91,7 @@ const TransactionForm = ({ onAddTransaction }) => {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value=""></option>
+
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}

@@ -8,6 +8,7 @@ const Header = ({ title }) => {
     <header className="bg-[#E0DDDB]">
       <div className="text-2xl antialiased font-semibold p-7">
         <p>{title}</p>
+
       </div>
     </header>
   );

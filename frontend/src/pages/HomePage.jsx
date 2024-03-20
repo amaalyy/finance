@@ -106,6 +106,7 @@ const HomePage = () => {
                 <p className="text-[40px]">100</p>
                 <p className="text-[20px]">Expense</p>
               </div>
+
             </div>
             <div className='grid grid-cols-2'>
               <TransactionForm onAddTransaction={handleAddTransaction} />

@@ -1,20 +1,51 @@
-import React from 'react';
-import { useContext, useState } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Sidebar from '../components/Sidebar';
-import TransactionList from '../components/TransactionList';
-import TransactionActions from '../components/TransactionActions';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Chart as ChartJS } from 'chart.js/auto';
-import { Bar, Doughnut } from 'react-chartjs-2';
+import Category from '../components/Category';
+import DeleteCategoryButton from '../components/DeleteCategoryButton'; // Import the DeleteCategoryButton component
+import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
 
 function NewCategory() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    onUpdateCategories();
+  }, []);
+
+  const onUpdateCategories = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get('http://127.0.0.1:8000/api/categories/', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const categoriesData = response.data;
+      setCategories(categoriesData);
+    } catch (error) {
+      console.error('Error updating categories:', error);
+    }
+  };
+
   return (
     <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] h-screen bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
       <Sidebar />
       <Header title="New Category" />
+      <div className="w-full bg-white shadow-md rounded p-8 mb-4">
+        <Category onUpdateCategories={onUpdateCategories} />
+        <h2 className="text-lg font-bold mt-4">All Categories</h2>
+        <ul>
+          {categories.map(category => (
+            <li key={category.id} className="flex items-center justify-between mt-3">
+              {category.name}
+              <DeleteCategoryButton
+                categoryId={category.id}
+                onUpdateCategories={onUpdateCategories}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
