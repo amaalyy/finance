@@ -16,7 +16,7 @@ const Sidebar = () => {
     <div className="grid grid-rows-[auto_auto_auto] bg-white p-3.5 shadow-sm row-span-2 h-screen sticky top-0">
       <NavLink
         to="/"
-        className="grid grid-cols-[auto_auto_1fr] mx-3 text-[25px] mt-6">
+        className="grid grid-cols-[auto_auto_1fr] mx-3 text-[25px] mt-3">
         <img className="h-8 w-8 mt-1" src={LogoIcon} alt="" />
         Wealthwise
       </NavLink>
