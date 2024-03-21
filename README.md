@@ -49,7 +49,7 @@ Install backend requirements using pip:
 pip install -r requirements.txt
 ```
 
-Set up your PostgreSQL database and update the database settings in the Django settings.py file.
+Set up your MySQL database and update the database settings in the Django settings.py file.
 
 Apply database migrations:
 ```bash
@@ -82,9 +82,9 @@ Access the application in your web browser at `http://localhost:5173/`.
 ## [Technologies Used](https://via.placeholder.com/10/00b48a?text=+)
 | Frontend           | Backend          |   
 | ----------------- | ------------------------------------------------------------------ |
-| [React.js]() | [Django]() |
+| [React Vite]() | [Django]() |
 | [React Router]() | [Django REST Framework]() |
-| [Chart.js]() | [PostgreSQL]() |
+| [Chart.js]() | [MySQL]() |
 | [Tailwind CSS]() | [JWT Authentication]() |
 
 ## [Usage](https://via.placeholder.com/10/00b48a?text=+)
