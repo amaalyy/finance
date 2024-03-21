@@ -12,7 +12,7 @@ import { Line, Doughnut } from 'react-chartjs-2';
 
 const AddIncomepage = () => {
   return (
-    <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] h-screen bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
+    <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
       <Sidebar />
       <Header title="Income" />
       <div className="grid grid-cols-[auto_1fr]">

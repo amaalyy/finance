@@ -55,7 +55,7 @@ const HomePage = () => {
   const forceRemount = () => setRemountKey((prevKey) => prevKey + 1);
 
   return (
-    <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] h-screen">
+    <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr]">
       <Sidebar />
       <Header title="Dashboard" />
       <div className="bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
