@@ -56,10 +56,10 @@ const AddIncomepage = () => {
         <div className="w-[780px] h-[400px] p-5 ml-8 mt-8 bg-white rounded-3xl drop-shadow-xl">
           <Line
             data={{
-              labels: ['Mon', 'Tus', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+              labels: incomeData.map(item => item.category),
               datasets: [
                 {
-                  label: incomeData.map(item => item.category),
+                  label: '',
                   data: incomeData.map(item => parseFloat(item.total_amount)),
                   backgroundColor: ['#FFC6FE', '#A0C4FF', '#9BF6FF']
                 },
