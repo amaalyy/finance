@@ -28,13 +28,13 @@ function NewCategory() {
   };
 
   return (
-    <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
+    <div className="grid grid-cols-[208px_1fr] antialiased grid-rows-[95px_1fr] bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
       <Sidebar />
       <Header title="New Category" />
       <div className="w-96 bg-white p-8 m-8 rounded-3xl drop-shadow-xl">
         <Category onUpdateCategories={onUpdateCategories} />
-        <h2 className="mt-6 text-xl font-semibold antialiased">All Categories</h2>
-        <ul>
+        <h2 className="my-4 text-xl font-semibold ">All Categories</h2>
+        <ul className='text-lg '>
           {categories.map(category => (
             <li key={category.id}>
               {category.name}

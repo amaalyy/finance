@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import axios from 'axios';
 import { Chart as ChartJS } from 'chart.js/auto';
-import { Line, Doughnut } from 'react-chartjs-2';
+import { Bar, Doughnut } from 'react-chartjs-2';
 
 const AddIncomepage = () => {
   const [incomeData, setIncomeData] = useState([]);
@@ -54,12 +54,12 @@ const AddIncomepage = () => {
           />
         </div>
         <div className="w-[780px] h-[400px] p-5 ml-8 mt-8 bg-white rounded-3xl drop-shadow-xl">
-          <Line
+          <Bar
             data={{
               labels: incomeData.map(item => item.category),
               datasets: [
                 {
-                  label: '',
+                  label: 'Incomes',
                   data: incomeData.map(item => parseFloat(item.total_amount)),
                   backgroundColor: ['#FFC6FE', '#A0C4FF', '#9BF6FF']
                 },

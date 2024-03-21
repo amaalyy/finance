@@ -17,9 +17,9 @@ function DeleteCategoryButton({ categoryId, onUpdateCategories }) {
   };
 
   return (
-    <div className='antialiased'>
+    <div className='antialiased grid'>
       <button
-        className="bg-red-500 text-white px-4 py-2 border border-red-700 hover:bg-red-600 rounded"
+        className="mb-3 bg-red-500 text-white px-4 py-1 border border-red-700 hover:bg-red-600 rounded"
         onClick={handleDelete}
       >
         Delete
