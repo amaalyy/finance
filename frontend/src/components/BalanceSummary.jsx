@@ -63,7 +63,7 @@ const chartOptions = {
       {error && <p>Error fetching balance: {error}</p>}
       {balanceData && (
         <>
-          <div className="h-[400px] w-[400px] p-6 ml-[135px] mt-[52px] bg-white rounded-3xl drop-shadow-xl">
+          <div className="h-[400px] w-[400px] p-6 ml-[135px] antialiased mt-[52px] bg-white rounded-3xl drop-shadow-xl">
             <Doughnut data={chartData} options={chartOptions} />
 
           </div>

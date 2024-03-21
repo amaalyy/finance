@@ -5,9 +5,6 @@ import { AuthContext } from '../contexts/AuthContext';
 import BackgroundImage from '/background.jpg';
 import UserIcon from '/username.svg';
 import PasswordIcon from '/password.svg';
-import GmailIcon from '/gmail.svg';
-import GithubIcon from '/github.svg';
-import FacebookIcon from '/facebook.svg';
 
 const Login = () => {
   const { login } = useContext(AuthContext);

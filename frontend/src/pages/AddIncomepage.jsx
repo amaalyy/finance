@@ -1,16 +1,36 @@
 import React from 'react';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
-import TransactionList from '../components/TransactionList';
-import TransactionActions from '../components/TransactionActions';
 import axios from 'axios';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Line, Doughnut } from 'react-chartjs-2';
 
 const AddIncomepage = () => {
+  const [incomeData, setIncomeData] = useState([]);
+
+  const token = localStorage.getItem('token');
+  const axiosInstance = axios.create({
+    baseURL: 'http://127.0.0.1:8000/api/',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'content-type': 'application/json'
+    }
+  });
+  useEffect(() => {
+    async function fetchReportData() {
+      try {
+        const incomeResponse = await axiosInstance.get('/income-report/');
+        setIncomeData(incomeResponse.data);
+      } catch (error) {
+        console.log('Error fetching report data:', error);
+      }
+    }
+
+    fetchReportData();
+  }, []);
+  
   return (
     <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
       <Sidebar />
@@ -19,11 +39,11 @@ const AddIncomepage = () => {
         <div className="h-[400px] w-[400px] p-6 ml-8 mt-8 bg-white rounded-3xl drop-shadow-xl">
           <Doughnut
             data={{
-              labels: ['Salery', 'Business', 'Side Husstles'],
+              labels: incomeData.map(item => item.category),
               datasets: [
                 {
                   label: '',
-                  data: [12, 19, 3],
+                  data: incomeData.map(item => parseFloat(item.total_amount)),
                   backgroundColor: ['#FFC6FE', '#A0C4FF', '#9BF6FF'],
                   weight: 100,
                   borderWidth: 5,
@@ -39,20 +59,10 @@ const AddIncomepage = () => {
               labels: ['Mon', 'Tus', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
               datasets: [
                 {
-                  label: 'Salery',
-                  data: [1, 9, 13, 18, 20, 13, 17],
-                  backgroundColor: ['#D6A9E3']
+                  label: incomeData.map(item => item.category),
+                  data: incomeData.map(item => parseFloat(item.total_amount)),
+                  backgroundColor: ['#FFC6FE', '#A0C4FF', '#9BF6FF']
                 },
-                {
-                  label: 'Business',
-                  data: [2, 6, 15, 8, 11, 7, 16],
-                  backgroundColor: ['#8BBEE9']
-                },
-                {
-                  label: 'Side Husstles',
-                  data: [4, 5, 3, 17, 8, 10, 7],
-                  backgroundColor: ['#9BF6FF']
-                }
               ]
             }}
           />
