@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
 import axios from 'axios';
 import BackgroundImage from '/background.jpg';
-import EmailIcon from '/email.svg';
+import EmailIcon from '/email.svg'; 
 import UserIcon from '/username.svg';
 import PasswordIcon from '/password.svg';
-
 const Signup = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -14,16 +13,13 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [signupSuccess, setSignupSuccess] = useState(false);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     // Basic password validation
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
-
     try {
       await axios.post('http://127.0.0.1:8000/api/register/', {
         email,
@@ -173,5 +169,4 @@ const Signup = () => {
     </div>
   );
 };
-
 export default Signup;

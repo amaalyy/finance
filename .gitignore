@@ -1,4 +1,0 @@
-db.sqlite3
-finance_app/__pycache__/
-*.pyc
-frontend/package-lock.json

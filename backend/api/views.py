@@ -1,91 +1,26 @@
+from datetime import timedelta
+
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from django.db.models import Sum
 from django.http import HttpRequest
-from rest_framework.response import Response
+
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
+
 from .pagination import CustomPagination
 from .models import Transaction, Category
 from .serializers import (TransactionsSerializer,
                           CategorySerializer,
                           IncomeReportSerializer,
                           ExpenseReportSerializer)
-from datetime import timedelta
-from rest_framework import status
-from django.contrib.auth import authenticate, login
-from rest_framework_simplejwt.tokens import RefreshToken
 
 
-@api_view(['GET'])
-def getRouts(request):
-    routes = [{'Endpoint': '/transaction/',
-               'method': 'GET',
-               'body': None,
-               'description': 'Returns an array of transactions'},
-              {'Endpoint': '/transaction/id',
-               'method': 'GET',
-               'body': None,
-               'description': 'Returns a single transaction object'},
-              {'Endpoint': '/transaction/',
-               'method': 'POST',
-               'body': {"transaction_type": "",
-                        "amount": 0,
-                        "category": 0,
-                        "description": "",
-                        },
-               'description': 'Creates new transaction with data sent in post request'},
-              {'Endpoint': '/transaction/id/',
-               'method': 'PUT',
-               'body': {"transaction_type": "",
-                        "amount": 0,
-                        "category": 0,
-                        "description": ""},
-               'description': 'Update an existing transaction with data sent in post request'},
-              {'Endpoint': '/transaction/id/',
-               'method': 'DELETE',
-               'body': None,
-               'description': 'Deletes and exiting transaction'},
-              {'Endpoint': '/categories/',
-               'method': 'GET',
-               'body': None,
-               'description': 'Returns an array of categories belonging to the authenticated user'},
-              {'Endpoint': '/categories/<category_id>/',
-               'method': 'GET',
-               'body': None,
-               'description': 'Returns a single category object by ID belonging to the authenticated user'},
-              {'Endpoint': '/categories/',
-               'method': 'POST',
-               'body': {"name": "Category Name"},
-               'description': 'Creates a new category with the provided name for the authenticated user'},
-              {'Endpoint': '/categories/<category_id>/',
-               'method': 'PUT',
-               'body': {"name": "Updated Category Name"},
-               'description': 'Update an existing category with the provided name for the authenticated user'},
-              {'Endpoint': '/categories/<category_id>/',
-               'method': 'DELETE',
-               'body': None,
-               'description': 'Deletes an existing category by ID belonging to the authenticated user'},
-              {'Endpoint': '/api/register/',
-               'Method': 'POST',
-               'Body': {"username": "",
-                        "password": "",
-                        "email": ""},
-               'Description': 'Registers a new user'},
-              {'Endpoint': '/api/login/',
-               'Method': 'POST',
-               'Body': {"username": "",
-                        "password": "",
-                        "remember_me": ""},
-               'Description': 'Logs in the user and obtains an authentication token'},
-              ]
-    return Response(routes)
-
-
-# /transaction GET
-# /transaction POST
-# /transaction/<id> GET
-# /transaction/<id> PUT
-# /transaction/<id> DELETE
 
 # ############     transaction    #################
 
@@ -101,31 +36,6 @@ def getTransactions(request):
         return createTransaction(request)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
-def getTransaction(request, pk):
-    try:
-        transaction = Transaction.objects.get(pk=pk)
-        if transaction.user != request.user:
-            return Response(
-                {
-                    'error':
-                    'You do not have permission to access this transaction.'},
-                status=status.HTTP_403_FORBIDDEN)
-    except Transaction.DoesNotExist:
-        return Response({'error': 'Transaction not found.'},
-                        status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'GET':
-        return getTransactionDetail(request, pk)
-
-    if request.method == 'PUT':
-        return updateTransaction(request, pk)
-
-    if request.method == 'DELETE':
-        return deleteTransaction(request, pk)
-
-
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_balance(request):
@@ -139,6 +49,65 @@ def get_balance(request):
     return Response({'balance': balance,
                      'total_income': total_income,
                      'total_expense': total_expense})
+
+
+def getTransactionList(request: HttpRequest):
+    paginator = CustomPagination()
+    transactions = Transaction.objects.filter(
+        user=request.user).order_by('-updated')
+
+    # Check if pagination parameters exist in the request
+    if 'page' in request.query_params or 'page_size' in request.query_params:
+        result_page = paginator.paginate_queryset(transactions, request)
+        serializer = TransactionsSerializer(result_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
+
+    # If no pagination parameters, return all transactions without pagination
+    serializer = TransactionsSerializer(transactions, many=True)
+    return Response(serializer.data)
+
+
+def getTransactionDetail(request, pk):
+    transaction = Transaction.objects.get(id=pk)
+    serializer = TransactionsSerializer(transaction, many=False)
+    return Response(serializer.data)
+
+
+def createTransaction(request):
+    serializer = TransactionsSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(user=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+def updateTransaction(request, pk):
+    transaction = Transaction.objects.get(pk=pk)
+    if transaction.user != request.user:
+        return Response(
+            {'error':
+             'You do not have permission to update this transaction.'},
+            status=status.HTTP_403_FORBIDDEN)
+
+    serializer = TransactionsSerializer(
+        instance=transaction, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+def deleteTransaction(request, pk):
+    transaction = Transaction.objects.get(pk=pk)
+    if transaction.user != request.user:
+        return Response(
+            {
+                'error':
+                'You do not have permission to delete this transaction.'},
+            status=status.HTTP_403_FORBIDDEN)
+    transaction.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 # ############     category    #################
 
@@ -223,6 +192,12 @@ def register(request):
         return Response({'error': 'Username and password are required'},
                         status=status.HTTP_400_BAD_REQUEST)
 
+    # Password Validation
+    try:
+        validate_password(password)
+    except ValidationError as e:
+        return Response({'error': e.messages}, status=status.HTTP_400_BAD_REQUEST)
+
     if User.objects.filter(username=username).exists():
         return Response({'error': 'Username already exists'},
                         status=status.HTTP_400_BAD_REQUEST)
@@ -292,63 +267,6 @@ def check_auth(request):
     return Response({'authenticated': True, 'user': user_data})
 
 
-def getTransactionList(request: HttpRequest):
-    paginator = CustomPagination()
-    transactions = Transaction.objects.filter(
-        user=request.user).order_by('-updated')
-
-    # Check if pagination parameters exist in the request
-    if 'page' in request.query_params or 'page_size' in request.query_params:
-        result_page = paginator.paginate_queryset(transactions, request)
-        serializer = TransactionsSerializer(result_page, many=True)
-        return paginator.get_paginated_response(serializer.data)
-
-    # If no pagination parameters, return all transactions without pagination
-    serializer = TransactionsSerializer(transactions, many=True)
-    return Response(serializer.data)
-
-
-def getTransactionDetail(request, pk):
-    transaction = Transaction.objects.get(id=pk)
-    serializer = TransactionsSerializer(transaction, many=False)
-    return Response(serializer.data)
-
-
-def createTransaction(request):
-    serializer = TransactionsSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save(user=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-def updateTransaction(request, pk):
-    transaction = Transaction.objects.get(pk=pk)
-    if transaction.user != request.user:
-        return Response(
-            {'error':
-             'You do not have permission to update this transaction.'},
-            status=status.HTTP_403_FORBIDDEN)
-
-    serializer = TransactionsSerializer(
-        instance=transaction, data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-def deleteTransaction(request, pk):
-    transaction = Transaction.objects.get(pk=pk)
-    if transaction.user != request.user:
-        return Response(
-            {
-                'error':
-                'You do not have permission to delete this transaction.'},
-            status=status.HTTP_403_FORBIDDEN)
-    transaction.delete()
-    return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 # ############  Reports ############################
 
@@ -392,3 +310,29 @@ def get_expense_report(request):
 
     serializer = ExpenseReportSerializer(expense_data, many=True)
     return Response(serializer.data)
+
+# ######### balance ###########
+
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def getTransaction(request, pk):
+    try:
+        transaction = Transaction.objects.get(pk=pk)
+        if transaction.user != request.user:
+            return Response(
+                {
+                    'error':
+                    'You do not have permission to access this transaction.'},
+                status=status.HTTP_403_FORBIDDEN)
+    except Transaction.DoesNotExist:
+        return Response({'error': 'Transaction not found.'},
+                        status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        return getTransactionDetail(request, pk)
+
+    if request.method == 'PUT':
+        return updateTransaction(request, pk)
+
+    if request.method == 'DELETE':
+        return deleteTransaction(request, pk)
