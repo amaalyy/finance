@@ -31,7 +31,7 @@ const BalanceSummary = ({ forceRemount }) => {
     datasets: [
       {
         label: 'TND', // Tunisian Dinar
-        backgroundColor: ['#CAFEBF', '#f44336'],
+        backgroundColor: ['#CAFEBF', '#fd5b77'],
         borderWidth: 1,
         data: [
           balanceData ? balanceData.total_income : 0,
