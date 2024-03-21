@@ -40,11 +40,11 @@ function ReportPage() {
 
 
   return (
-    <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] h-screen bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
+    <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
       <Sidebar />
       <div className="">
         <Header title="Income" />
-        <div className="grid grid-cols-[auto_1fr]">
+        <div className=" grid grid-cols-[auto_1fr]">
           <div className="h-[400px] w-[400px] p-6 ml-8 mt-8 bg-white rounded-3xl drop-shadow-xl">
             <Doughnut
               data={{
@@ -81,9 +81,7 @@ function ReportPage() {
           </div>
         </div>
       </div>
-      <Footer/>
     </div>
-
   );
 }
 
