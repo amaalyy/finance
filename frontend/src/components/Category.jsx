@@ -30,15 +30,15 @@ const Category = ({ onUpdateCategories }) => {
   };
 
   return (
-    <div className='mt-5'>
-      <h3>Add New Category</h3>
-      <input
+    <div className='antialiased'>
+      <h3 className='mb-6 text-xl font-semibold'>Add New Category</h3>
+      <input className='w-full px-4 py-2 mb-6 border border-gray-300 rounded-md focus:outline-none focus:border-[#2DDA9B]'
         type="text"
         value={categoryName}
         onChange={(e) => setCategoryName(e.target.value)}
         placeholder="Category Name"
       />
-      <button onClick={handleAddCategory}>Add Category</button>
+      <button className='rounded-full px-6 py-1.5 bg-[#2DDA9B] text-white hover:bg-[#2dda9bcf]' onClick={handleAddCategory}>Add Category</button>
       {error && <p>Error: {error}</p>}
     </div>
   );

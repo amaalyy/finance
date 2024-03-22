@@ -7,8 +7,8 @@ function DeleteCategoryButton({ categoryId, onUpdateCategories }) {
       const token = localStorage.getItem('token');
       await axios.delete(`http://127.0.0.1:8000/api/categories/${categoryId}`, {
         headers: {
-          Authorization: `Bearer ${token}`,
-        },
+          Authorization: `Bearer ${token}`
+        }
       });
       onUpdateCategories(); // Update categories after deletion
     } catch (error) {
@@ -17,11 +17,15 @@ function DeleteCategoryButton({ categoryId, onUpdateCategories }) {
   };
 
   return (
-    <button className="ml-2 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={handleDelete}>
-      Delete
-    </button>
+    <div className='antialiased grid'>
+      <button
+        className="mb-3 bg-red-500 text-white px-4 py-1 border border-red-700 hover:bg-red-600 rounded"
+        onClick={handleDelete}
+      >
+        Delete
+      </button>
+    </div>
   );
 }
 
 export default DeleteCategoryButton;
-

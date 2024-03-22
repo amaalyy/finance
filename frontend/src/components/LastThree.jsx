@@ -39,11 +39,11 @@ const getLastThreeTransaction = async () => {
     return (
       <>
       <p className="text-xl antialiased font-semibold ml-8 mt-4">
-              Last Transaction
+              Last Transactions
             </p>
       <div className="text-white antialiased grid grid-cols-[400px_400px_400px] mb-8 px-7 gap-8">
               {lastThree.map((transaction, index) => (
-                <div key={index} className="relative h-[219px] p-6 mt-4 rounded-3xl bg-gradient-to-r from-[#FFBC95] to-[#FE7095] drop-shadow-xl">
+                <div key={index} className="relative h-[219px] p-6 mt-4 rounded-3xl bg-gradient-to-r from-[#8EC8F8] to-[#047EDF] drop-shadow-xl">
                   <div className="bg-no-repeat bg-right inset-0 absolute bg-[url('https://demo.bootstrapdash.com/purple/themes/assets/images/dashboard/circle.svg')]"></div>
                   <p className="text-[25px]">{transaction.category_name}</p>
                   <p className="text-[40px]">{transaction.amount}</p>

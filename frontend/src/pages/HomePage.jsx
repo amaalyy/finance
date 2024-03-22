@@ -3,7 +3,6 @@ import { AuthContext } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import TransactionList from '../components/TransactionList';
-import TransactionActions from '../components/TransactionActions';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BalanceSummary from '../components/BalanceSummary';
@@ -55,7 +54,7 @@ const HomePage = () => {
   const forceRemount = () => setRemountKey((prevKey) => prevKey + 1);
 
   return (
-    <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] h-screen">
+    <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr]">
       <Sidebar />
       <Header title="Dashboard" />
       <div className="bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">

@@ -28,15 +28,15 @@ function NewCategory() {
   };
 
   return (
-    <div className="grid grid-cols-[208px_1fr] grid-rows-[95px_1fr] h-screen bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
+    <div className="grid grid-cols-[208px_1fr] antialiased grid-rows-[95px_1fr] bg-gradient-to-r from-[#DDEFFA] to-[#C0DFF4]">
       <Sidebar />
       <Header title="New Category" />
-      <div className="w-full bg-white shadow-md rounded p-8 mb-4">
+      <div className="w-96 mx-auto bg-white p-8 m-8 rounded-3xl drop-shadow-xl">
         <Category onUpdateCategories={onUpdateCategories} />
-        <h2 className="text-lg font-bold mt-4">All Categories</h2>
-        <ul>
+        <h2 className="my-4 text-xl font-semibold ">All Categories</h2>
+        <ul className='text-lg '>
           {categories.map(category => (
-            <li key={category.id} className="flex items-center justify-between mt-3">
+            <li key={category.id}>
               {category.name}
               <DeleteCategoryButton
                 categoryId={category.id}

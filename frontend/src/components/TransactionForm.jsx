@@ -62,7 +62,7 @@ const TransactionForm = ({ onAddTransaction }) => {
   return (
     <div className="ml-8 antialiased">
       <h3 className="mb-6 text-xl font-semibold">Add New Transaction</h3>
-      <div className="w-[820px] h-[400px] px-11 py-5 grid grid-rows-[1fr_1fr_1fr_1fr] mb-4 bg-white rounded-3xl drop-shadow-xl">
+      <div className="w-[830px] h-[400px] px-11 py-5 grid grid-rows-[1fr_1fr_1fr_1fr] mb-4 bg-white rounded-3xl drop-shadow-xl">
         <label className="mb-2 text-lg">
           <div className="my-2 font-medium">Description</div>
           <input
