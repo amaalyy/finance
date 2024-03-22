@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
 import TransactionList from '../components/TransactionList';
-import TransactionActions from '../components/TransactionActions';
+import TransactionActions from '../components/UserAccount';
 import axios from 'axios';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar, Doughnut } from 'react-chartjs-2';

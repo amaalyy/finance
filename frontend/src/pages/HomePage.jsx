@@ -3,7 +3,6 @@ import { AuthContext } from '../contexts/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import TransactionList from '../components/TransactionList';
-import TransactionActions from '../components/TransactionActions';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BalanceSummary from '../components/BalanceSummary';
