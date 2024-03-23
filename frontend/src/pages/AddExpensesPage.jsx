@@ -6,10 +6,14 @@ import axios from 'axios';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
 
+
+// Functional component AddExpensesPage
 function AddExpensesPage() {
   const [expenseData, setExpenseData] = useState([]);
 
+  // Retrieving token from localStorage
   const token = localStorage.getItem('token');
+  // Creating axios instance with baseURL and authorization headers
   const axiosInstance = axios.create({
     baseURL: 'http://127.0.0.1:8000/api/',
     headers: {
@@ -17,9 +21,12 @@ function AddExpensesPage() {
       'content-type': 'application/json'
     }
   });
+   // useEffect hook to fetch expense report data
   useEffect(() => {
+    // Asynchronous function to fetch report data
     async function fetchReportData() {
       try {
+        // Making GET request to fetch expense report data
         const expenseResponse = await axiosInstance.get('/expense-report/');
         setExpenseData(expenseResponse.data);
       } catch (error) {
@@ -27,16 +34,19 @@ function AddExpensesPage() {
       }
     }
 
-    fetchReportData();
+    fetchReportData(); // Invoking fetchReportData function on component mount
   }, []);
 
+  // Function to render doughnut charts
   const renderCharts = () => {
     const colors = ['#FFC6FE', '#A0C4FF', '#9BF6FF', '#CAFEBF', '#FCFFB6'];
     const charts = [];
     let chunkIndex = 0;
 
+    // Iterating over expenseData in chunks of 5
     for (let i = 0; i < expenseData.length; i += 5) {
       const chunk = expenseData.slice(i, i + 5);
+      // Configuring chart data for the chunk
       const chartData = {
         labels: chunk.map((item) => item.category),
         datasets: [
@@ -50,7 +60,7 @@ function AddExpensesPage() {
           }
         ]
       };
-
+// Rendering Doughnut chart for the chunk and adding it to charts array
       charts.push(
         <div key={chunkIndex}>
           <Doughnut data={chartData} />

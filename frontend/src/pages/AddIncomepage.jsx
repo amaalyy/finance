@@ -7,10 +7,13 @@ import axios from 'axios';
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Bar, Doughnut } from 'react-chartjs-2';
 
+// Functional component AddIncomepage
 const AddIncomepage = () => {
   const [incomeData, setIncomeData] = useState([]);
 
+  // Retrieving token from localStorage
   const token = localStorage.getItem('token');
+   // Creating axios instance with baseURL and authorization headers
   const axiosInstance = axios.create({
     baseURL: 'http://127.0.0.1:8000/api/',
     headers: {
@@ -18,9 +21,12 @@ const AddIncomepage = () => {
       'content-type': 'application/json'
     }
   });
+   // useEffect hook to fetch income report data
   useEffect(() => {
+     // Asynchronous function to fetch report data
     async function fetchReportData() {
       try {
+        // Making GET request to fetch income report data
         const incomeResponse = await axiosInstance.get('/income-report/');
         setIncomeData(incomeResponse.data);
       } catch (error) {
@@ -28,7 +34,7 @@ const AddIncomepage = () => {
       }
     }
 
-    fetchReportData();
+    fetchReportData();  // Invoking fetchReportData function on component mount
   }, []);
   
   return (

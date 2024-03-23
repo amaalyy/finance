@@ -4,14 +4,19 @@ import axios from 'axios';
 import Card from './Card';
 import { Doughnut } from 'react-chartjs-2';
 
+//Functional component BalanceSummary
 const BalanceSummary = ({ forceRemount }) => {
-  const [balanceData, setBalanceData] = useState(null);
+  //state variables
+  const [balanceData, setBalanceData] = useState(null); 
   const [error, setError] = useState(null);
 
+//useEffect hook for fetching balance data
   useEffect(() => {
+    //Asynchronus function to fetch balance data
     const fetchBalance = async () => {
       try {
         const token = localStorage.getItem('token');
+        // Making GET request to fetch balance data
         const response = await axios.get('http://127.0.0.1:8000/api/balance/', {
           headers: {
             Authorization: `Bearer ${token}`
@@ -25,7 +30,7 @@ const BalanceSummary = ({ forceRemount }) => {
 
     fetchBalance();
   }, [forceRemount]);
-
+// Data for Doughnut chart
   const chartData = {
     labels: ['Total Income', 'Total Expense'],
     datasets: [
@@ -41,6 +46,7 @@ const BalanceSummary = ({ forceRemount }) => {
       }
     ]
   };
+// options fo doughnut chart
 const chartOptions = {
   plugins: {
     title: {
@@ -57,7 +63,7 @@ const chartOptions = {
     }
   }
 };
-
+ //JSX rendering
   return (
     <div className=''>
       {error && <p>Error fetching balance: {error}</p>}

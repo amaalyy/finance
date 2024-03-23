@@ -12,16 +12,19 @@ import { Bar, Doughnut } from 'react-chartjs-2';
 import TransactionForm from '../components/TransactionForm';
 import LastThree from '../components/LastThree';
 
+// Functional component HomePage
 const HomePage = () => {
   const { user, loading } = useContext(AuthContext);
   const [transactions, setTransactions] = useState([]);
  
-
+// If loading, display "Loading..." message
   if (loading) {
     return <p>Loading...</p>;
   }
 
+   // Retrieving token from localStorage
   const token = localStorage.getItem('token');
+   // Creating axios instance with baseURL and authorization headers
   const axiosInstance = axios.create({
     baseURL: 'http://127.0.0.1:8000/api/',
     headers: {
@@ -31,15 +34,17 @@ const HomePage = () => {
   });
 
  
-
+// Function to handle adding a new transaction
   const handleAddTransaction = async (newTransaction) => {
     try {
       console.log('Adding transaction:', newTransaction);
+      // Making POST request to add new transaction
       const response = await axiosInstance.post(
         '/transaction/',
         newTransaction
       );
       console.log('Transaction added successfully:', response.data);
+       // Updating transactions state with new transaction
       setTransactions([...transactions, response.data]);
     } catch (error) {
       console.error('Error adding transaction:', error);

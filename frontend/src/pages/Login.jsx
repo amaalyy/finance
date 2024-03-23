@@ -6,6 +6,8 @@ import BackgroundImage from '/background.jpg';
 import UserIcon from '/username.svg';
 import PasswordIcon from '/password.svg';
 
+
+// Functional component Login
 const Login = () => {
   const { login } = useContext(AuthContext);
   const [username, setUsername] = useState('');
@@ -13,19 +15,24 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+    // Function to handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
+      // Making POST request to login endpoint with username and password
       const response = await axios.post('http://127.0.0.1:8000/api/login/', {
         username,
         password
       });
+      // Calling login function from AuthContext with response data
       login(response.data);
+       // Navigating to '/home' route
       navigate('/home');
     } catch (error) {
       console.log(error);
       console.error('Login failed:', error.response.data);
+       // Setting error message if login fails
       setError('Invalid username or password');
     }
   };

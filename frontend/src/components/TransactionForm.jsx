@@ -9,13 +9,16 @@ const TransactionForm = ({ onAddTransaction }) => {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
 
+  // useEffect hook to fetch categories
   useEffect(() => {
     getCategory();
   }, []);
 
+// Function to fetch categories
   const getCategory = async () => {
     try {
       const token = localStorage.getItem('token');
+      // Making GET request to fetch categories
       const response = await axios.get('http://127.0.0.1:8000/api/categories', {
         headers: {
           Authorization: `Bearer ${token}`
@@ -31,6 +34,7 @@ const TransactionForm = ({ onAddTransaction }) => {
     }
   };
 
+   // Function to handle adding transaction
   const handleAddTransaction = () => {
     // Validate input fields
     if (!description || !amount || !category || !transactionType) {

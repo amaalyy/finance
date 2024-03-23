@@ -6,7 +6,7 @@ import EmailIcon from '/email.svg';
 import UserIcon from '/username.svg';
 import PasswordIcon from '/password.svg';
 const Signup = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Access the navigate function from the react-router-dom
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -21,6 +21,7 @@ const Signup = () => {
       return;
     }
     try {
+       // Send signup request to the server
       await axios.post('http://127.0.0.1:8000/api/register/', {
         email,
         username,
@@ -44,7 +45,7 @@ const Signup = () => {
   };
 
   const goBack = () => {
-    navigate(-1);
+    navigate(-1);  // Go back to the previous page using the navigate function
   };
 
   return (

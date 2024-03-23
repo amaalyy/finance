@@ -6,12 +6,13 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 
 function NewCategory() {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]); // State for storing categories
 
   useEffect(() => {
-    onUpdateCategories();
+    onUpdateCategories(); // Fetch categories on component mount
   }, []);
 
+   // Function to fetch categories from the server
   const onUpdateCategories = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -21,7 +22,7 @@ function NewCategory() {
         },
       });
       const categoriesData = response.data;
-      setCategories(categoriesData);
+      setCategories(categoriesData); // Update categories in state
     } catch (error) {
       console.error('Error updating categories:', error);
     }

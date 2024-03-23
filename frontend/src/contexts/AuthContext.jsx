@@ -2,8 +2,10 @@ import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
 
+// Creating AuthContext
 export const AuthContext = createContext();
 
+// Creating AuthProvider component
 export const AuthProvider = ({ children }) => {
     
   // State to manage the user data

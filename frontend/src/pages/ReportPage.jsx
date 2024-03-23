@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 
 function ReportPage() {
+   // State variables to store income and expense data
   const [incomeData, setIncomeData] = useState([]);
   const [expenseData, setExpenseData] = useState([]);
 
@@ -16,11 +17,15 @@ function ReportPage() {
       'content-type': 'application/json'
     }
   });
+  // Fetch data from the server on component mount
   useEffect(() => {
     async function fetchReportData() {
       try {
+        // Fetch income data
         const incomeResponse = await axiosInstance.get('/income-report/');
+         // Fetch expense data
         const expenseResponse = await axiosInstance.get('/expense-report/');
+        // Set income and expense data in state
         setIncomeData(incomeResponse.data);
         setExpenseData(expenseResponse.data);
       } catch (error) {
